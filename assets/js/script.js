@@ -12,18 +12,15 @@ function handleClick() {
         // localStartDateTime=2022-04-10T08:00:00,2022-04-15T20:00:00 --> format for date range --> event.dates.start.dateTime
         date: document.getElementById('date').value.trim()
     }
-    console.log(searchOptions.category);
-
-
-    // let city = document.getElementById('city').value.trim();
 
     if (searchOptions) {
         fetchEvent(searchOptions);
         document.getElementById('city').value = "";
         document.getElementById('category').value = "";
         document.getElementById('date').value = "";
+        // fix else if statement to alert when city and date are not inputted * * * * * * * * * * *
     } else if (!searchOptions) {
-        alert("Please enter a city.");
+        alert("Please enter a city and a date.");
         return;
     }
     // set localStorage 
@@ -35,7 +32,7 @@ function handleClick() {
 };
 
 function fetchEvent(searchOptions) {
-    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
+    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.date}&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
         .then (data => {
