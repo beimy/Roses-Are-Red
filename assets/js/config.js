@@ -1,1 +1,1 @@
-const event_api_key = "";
+const ticket_api_key = "XjIux5UMS2W43QuYUW75iFYvsllPpfdd";

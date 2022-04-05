@@ -2,15 +2,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
 
+:root {
+    --drk: rgb(54,54,54);
+    /* rgb(173,16,14) */
+    --drk-red: rgb(146,12,31);
+}
+
 * {
     /* font-family: 'Advent Pro', sans-serif; */
     /* font-family: 'Rock Salt', cursive; */
     font-family: 'Bungee Hairline', cursive;
-}
-
-:root {
-    --drk: rgb(31,35,48);
-    --drk-red: rgb(173,16,14);
+    background-color: var(--drk);
 }
 
 button {
@@ -20,3 +22,4 @@ button {
 .has-text-dark-red {
     color: var(--drk-red);
 }
+
