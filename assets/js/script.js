@@ -6,24 +6,36 @@ searchHistory = [];
 
 // get city input from user
 function handleClick() {
-    let city = document.getElementById('city').value.trim();
-    if (city) {
-        fetchEvent(city);
+    var searchOptions = {
+        city: document.getElementById('city').value.trim(),
+        category: document.getElementById('category').value.trim(),
+        // localStartDateTime=2022-04-10T08:00:00,2022-04-15T20:00:00 --> format for date range --> event.dates.start.dateTime
+        date: document.getElementById('date').value.trim()
+    }
+    console.log(searchOptions.category);
+
+
+    // let city = document.getElementById('city').value.trim();
+
+    if (searchOptions) {
+        fetchEvent(searchOptions);
         document.getElementById('city').value = "";
-    } else if (!city) {
+        document.getElementById('category').value = "";
+        document.getElementById('date').value = "";
+    } else if (!searchOptions) {
         alert("Please enter a city.");
         return;
     }
     // set localStorage 
-    if (!searchHistory.includes(city)) {
-        searchHistory.push(city);
+    if (!searchHistory.includes(searchOptions)) {
+        searchHistory.push(searchOptions);
     };
 
     localStorage.setItem("City", JSON.stringify(searchHistory));
 };
 
-function fetchEvent(city) {
-    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${city}&apikey=${ticket_api_key}`;
+function fetchEvent(searchOptions) {
+    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
         .then (data => {
@@ -45,6 +57,5 @@ function fetchEvent(city) {
                     </a>
                 `
             });
-            // { const }
         }) 
 }
