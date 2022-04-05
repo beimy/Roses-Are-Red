@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
+
+:root {
+    --drk: rgb(54,54,54);
+    /* rgb(173,16,14) */
+    --drk-red: rgb(146,12,31);
+}
+
+* {
+    font-family: 'Bungee Hairline', cursive;
+    background-color: var(--drk);
+}
+
+main {
+    width: 30%;
+    margin: 0 auto;
+}
+
+aside {
+    width: 90%;
+    margin: 5px;
+}
+
+.results {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border-radius: 12px;
+    border: 2px solid lightgray;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+.card h4, .card a {
+    background-color: white;
+}
+
+.card img {
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+}

@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Get Started</title>
+    <link rel="icon" href="./assets/images/roses.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/builderstyle.css">
 </head>
-<body>
-    <p>Welcome to the date builder</p>
 
-    
+<body>
+    <header class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="has-text-centered">
+                        <label class="has-text-white is-size-3">Enter City:</label>
+                        <input class="input is-rounded" type="text" id="city"
+                        placeholder="i.e. Orlando">
+
+                        <label class="has-text-white is-size-3">Enter Category:</label>
+                        <p class="has-text-white">Categories Include: Arts & Theatre, Concerts, Family, Film, Music, and Sports</p>
+                        <input class="input is-rounded" type="text" id="category"
+                        placeholder="i.e. Music">
+
+                        <label class="has-text-white is-size-3">Enter Date:</label>
+                        <p class="has-text-white">Date Range Format (Start Date & Time, End Date & Time): YYYY-MM-DDTHH:MM:SS, YYYY-MM-DDTHH:MM:SS</p>
+                        <input class="input is-rounded" type="text" id="date"
+                        placeholder="i.e. YYYY-MM-DDTHH:MM:SS, YYYY-MM-DDTHH:MM:SS">
+
+                        <a class="button is-light is-normal is-responsive has-text-weight-semibold" type="button" id="search" class="btn btn-dark">Search</a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+    <aside>
+        <div class="results"></div>
+    </aside>
+
+    <main>
+
+    </main>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

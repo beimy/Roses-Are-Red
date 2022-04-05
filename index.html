@@ -3,25 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roses are Red</title>
+    <link rel="icon" href="./assets/images/roses.ico" type="image/x-icon">
+    <!-- <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Planner</title>
+    /> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+ 
 </head>
 <body>
-    <header>
-        <h1>Welcome To Our Date Planner!</h1>
-        <p>Use this to plan your next date!</p>
-    </header>
 
-    <button type="button" id="start-date-btn">Get Started</button>
-    
+    <main class="hero is-fullheight is-dark">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-size-3-mobile is-size-2-tablet is-size-1">
+                    Welcome to <span class="has-text-dark-red">Roses are Red</span>
+                </h1>
+                <p class="subtitle is-size-6-mobile is-size-5 has-text-weight-medium">
+                    Click <span class="is-size-5-mobile is-size-4 has-text-weight-semibold">Get Started</span> to begin planning your date
+                </p>
+                <a href="./datebuilder.html" class="button is-light is-normal is-responsive has-text-weight-semibold" id="start-date-btn">Get Started</a>
+                <a href="./itinerary.html" class="button is-light is-normal is-responsive has-text-weight-semibold" id="itinerary-btn">Itinerary</a>
+            </div>
+        </div>
+    </main>
     
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/script.js"></script>
 
 </body>
 </html>
