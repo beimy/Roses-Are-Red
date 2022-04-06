@@ -6,10 +6,16 @@ $.datepicker.setDefaults($.datepicker.regional['nl']);
 $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
 
 // start-date date picker
-$("#start-date").datepicker();
+$("#start-date").datepicker({
+    changeMonth: true,
+    changeYear: true
+  });
 
 // end-date date picker
-$("#end-date").datepicker();
+$("#end-date").datepicker({
+    changeMonth: true,
+    changeYear: true
+  });
 
 // set search history to empty array
 searchHistory = [];

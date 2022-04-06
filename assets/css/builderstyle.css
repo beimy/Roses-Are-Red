@@ -56,6 +56,7 @@ table th, td {
 .ui-datepicker-month, .ui-datepicker-year {
     color: white;
     font-size: 30px;
+    font-family: 'Bungee Hairline', cursive;
 }
 
 .ui-icon {
