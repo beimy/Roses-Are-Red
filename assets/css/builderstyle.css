@@ -82,7 +82,7 @@ p {
     margin: 10px;
 }
 
-.results {
+.results, .brew-results {
     display: flex;
     flex-wrap: wrap;
 }

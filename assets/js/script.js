@@ -58,6 +58,7 @@ function eventSearch_handleClick() {
 };
 
 function fetchEvent(searchOptions) {
+    // fetch event data from ticket master api
     let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.startDate}T00:00:01,${searchOptions.endDate}T23:59:59&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
@@ -82,16 +83,38 @@ function fetchEvent(searchOptions) {
                     </a>`
             });
         }) 
-}
-
-
-function fetchYelp(yelpSearch_Params) {
-    let yelp_api = `https://api.yelp.com/v3/businesses/search/${yelp_api_key}`;
-    fetch(yelp_api)
+    
+    // fetch lat and lon from open weather map api
+    let url = `https://api.openweathermap.org/geo/1.0/direct?q=${searchOptions.city}&limit=1&appid=${api_key}`
+    fetch(url)
         .then(data => data.json())
         .then(data => {
+            const { lat, lon } = data[0];
+
+    // fetch brewery data from open brewery db api
+    let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=10`
+    fetch(brew_api)
+        .then(data => data.json())
+        .then (data => {
             console.log(data);
-        })
+        });
+    }); 
 }
 
-fetchYelp();
+
+
+
+
+
+
+
+// function fetchYelp(yelpSearch_Params) {
+//     let yelp_api = `https://api.yelp.com/v3/businesses/search/${yelp_api_key}`;
+//     fetch(yelp_api)
+//         .then(data => data.json())
+//         .then(data => {
+//             console.log(data);
+//         })
+// }
+
+// fetchYelp();
