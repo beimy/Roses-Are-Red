@@ -16,15 +16,6 @@
     color: var(--drk-red);
 }
 
-main {
-    width: 30%;
-    margin: 0 auto;
-}
-
-aside {
-    width: 90%;
-    margin: 5px;
-}
 
 .input-box {
     display: flex;
@@ -82,14 +73,33 @@ p {
     margin: 10px;
 }
 
-.results, .brew-results {
+.results {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.brew-results {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.event-results {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.event-results, .brew-results {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 40%;
     border-radius: 12px;
     border: 2px solid lightgray;
