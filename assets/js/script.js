@@ -63,3 +63,14 @@ function fetchEvent(searchOptions) {
             });
         }) 
 }
+
+function fetchYelp(yelpSearch_Params) {
+    let yelp_api = `https://api.yelp.com/v3/businesses/search/${yelp_api_key}`;
+    fetch(yelp_api)
+        .then(data => data.json())
+        .then(data => {
+            console.log(data);
+        })
+}
+
+fetchYelp();
