@@ -1,34 +1,41 @@
 // add click event listener to call search button and run handleClick function
-document.getElementById('search').addEventListener('click', handleClick);
+document.getElementById('search').addEventListener('click', eventSearch_handleClick);
 
 // set search history to empty array
 searchHistory = [];
 
 // get city input from user
-function handleClick() {
-    var searchOptions = {
-        city: document.getElementById('city').value.trim(),
-        category: document.getElementById('category').value.trim(),
-        // localStartDateTime=2022-04-10T08:00:00,2022-04-15T20:00:00 --> format for date range --> event.dates.start.dateTime
-        date: document.getElementById('date').value.trim()
-    }
+function eventSearch_handleClick() {
+    //validate search options with an if statement
+    var searchedCity = document.getElementById('city').value.trim();
+    var searchedCategory = document.getElementById('category').value.trim();
+    var searchedDate = document.getElementById('date').value.trim();
 
-    if (searchOptions) {
+    if(!searchedCity == "" && !searchedDate == "" ) {
+        var searchOptions = {
+            city: searchedCity,
+            category: searchedCategory,
+            // hard code time into localstartdatetime * * * * * * * * * * * *
+            // localStartDateTime=2022-04-10T08:00:00,2022-04-15T20:00:00 --> format for date range --> event.dates.start.dateTime
+            date: searchedDate
+        }
+
         fetchEvent(searchOptions);
         document.getElementById('city').value = "";
         document.getElementById('category').value = "";
         document.getElementById('date').value = "";
-        // fix else if statement to alert when city and date are not inputted * * * * * * * * * * *
-    } else if (!searchOptions) {
+
+        if (!searchHistory.includes(searchOptions)) {
+            searchHistory.push(searchOptions);
+        };
+    
+        localStorage.setItem("City", JSON.stringify(searchHistory));
+    }
+    else {  
         alert("Please enter a city and a date.");
         return;
     }
-    // set localStorage 
-    if (!searchHistory.includes(searchOptions)) {
-        searchHistory.push(searchOptions);
-    };
-
-    localStorage.setItem("City", JSON.stringify(searchHistory));
+    
 };
 
 function fetchEvent(searchOptions) {
@@ -55,10 +62,4 @@ function fetchEvent(searchOptions) {
                 `
             });
         }) 
-}
-
-
-function AaronsFunciton() {
-
-    //this should break this page
 }
