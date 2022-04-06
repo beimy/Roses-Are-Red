@@ -9,21 +9,24 @@ function eventSearch_handleClick() {
     //validate search options with an if statement
     var searchedCity = document.getElementById('city').value.trim();
     var searchedCategory = document.getElementById('category').value.trim();
-    var searchedDate = document.getElementById('date').value.trim();
+    var searchedStartDate = document.getElementById('start-date').value.trim();
+    var searchedEndDate = document.getElementById('end-date').value.trim();
 
-    if(!searchedCity == "" && !searchedDate == "" ) {
+    if(!searchedCity == "" && !searchedStartDate == "" && !searchedEndDate == "") {
         var searchOptions = {
             city: searchedCity,
             category: searchedCategory,
             // hard code time into localstartdatetime * * * * * * * * * * * *
             // localStartDateTime=2022-04-10T08:00:00,2022-04-15T20:00:00 --> format for date range --> event.dates.start.dateTime
-            date: searchedDate
+            startDate: searchedStartDate,
+            endDate: searchedEndDate
         }
 
         fetchEvent(searchOptions);
         document.getElementById('city').value = "";
         document.getElementById('category').value = "";
-        document.getElementById('date').value = "";
+        document.getElementById('start-date').value = "";
+        document.getElementById('end-date').value = "";
 
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
@@ -32,14 +35,14 @@ function eventSearch_handleClick() {
         localStorage.setItem("City", JSON.stringify(searchHistory));
     }
     else {  
-        alert("Please enter a city and a date.");
+        alert("Please enter a city, a start date, and an end date.");
         return;
     }
     
 };
 
 function fetchEvent(searchOptions) {
-    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.date}&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
+    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.startDate}T12:00:01,${searchOptions.endDate}T23:59:59&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
         .then (data => {
