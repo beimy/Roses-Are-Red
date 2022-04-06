@@ -39,6 +39,10 @@ aside {
     
 }
 
+h4 {
+    font-weight: bold;
+}
+
 a {
     margin: 25px;
     color: white;
@@ -54,9 +58,15 @@ table th, td {
 }
 
 .ui-datepicker-month, .ui-datepicker-year {
-    color: white;
+    color: var(--drk-red);
+    font-weight: bold;
     font-size: 30px;
     font-family: 'Bungee Hairline', cursive;
+}
+
+.ui-state-default:hover {
+    color: var(--drk-red);
+    font-weight: bold;
 }
 
 .ui-icon {

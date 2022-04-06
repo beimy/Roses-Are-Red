@@ -71,12 +71,12 @@ function fetchEvent(searchOptions) {
                 document.querySelector(".results").innerHTML += 
                 `<a href="${event.url}" class="card">
                         <img src="${event.images[0].url}">
-                        <div class="has-text-weight-bold is-size-4">
-                        <h4>Event Name: ${event.name}</h4>
-                        <h4>Event Classification: ${event.classifications[0].segment.name}</h4>
-                        <h4>Event Date & Time: ${eventDateTime}</h4>
-                        <h4>Event Venue: ${event._embedded.venues[0].name}</h4>
-                        <h4>Event Address: ${event._embedded.venues[0].address.line1}</h4>
+                        <div class="is-size-6">
+                        <h4><span class="has-text-dark-red has-background-white">Event Name:</span> ${event.name}</h4>
+                        <h4><span class="has-text-dark-red has-background-white">Event Classification:</span> ${event.classifications[0].segment.name}</h4>
+                        <h4><span class="has-text-dark-red has-background-white">Event Date & Time:</span> ${eventDateTime}</h4>
+                        <h4><span class="has-text-dark-red has-background-white">Event Venue:</span> ${event._embedded.venues[0].name}</h4>
+                        <h4><span class="has-text-dark-red has-background-white">Event Address:</span> ${event._embedded.venues[0].address.line1}</h4>
                         <h4>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}. ${event._embedded.venues[0].postalCode}</h4>
                         </div>
                     </a>`
