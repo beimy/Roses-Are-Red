@@ -9,6 +9,7 @@ function handleClick() {
     var searchOptions = {
         city: document.getElementById('city').value.trim(),
         category: document.getElementById('category').value.trim(),
+        // hard code time into localstartdatetime * * * * * * * * * * * *
         // localStartDateTime=2022-04-10T08:00:00,2022-04-15T20:00:00 --> format for date range --> event.dates.start.dateTime
         date: document.getElementById('date').value.trim()
     }
@@ -55,4 +56,8 @@ function fetchEvent(searchOptions) {
                 `
             });
         }) 
+}
+
+function hello() {
+    console.log('hello');
 }
