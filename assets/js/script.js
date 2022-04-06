@@ -43,23 +43,24 @@ function fetchEvent(searchOptions) {
     fetch(ticket_api)
         .then(data => data.json())
         .then (data => {
-            jd = data;
+            // jd = data;
             console.log(data);
             let events = data._embedded.events;
             events.forEach(event => {
-                eventDate = moment(`${event.dates.start.localDate}`).format('MMMM Do, YYYY');
-                document.querySelector(".results").innerHTML += `
-                    <a href="${event.url}" class="card" >
-                        <img src="${event.images[0].url}"
+                // prints out in this format: April 11th, 2022 @ 7:30pm
+                eventDateTime = moment(`${event.dates.start.dateTime}`).format('MMMM Do, YYYY @ hh:mm a');
+                document.querySelector(".results").innerHTML += 
+                `<a href="${event.url}" class="card" >
+                        <img src="${event.images[0].url}">
+                        <div class="has-text-weight-bold is-size-4">
                         <h4>Event Name: ${event.name}</h4>
                         <h4>Event Classification: ${event.classifications[0].segment.name}</h4>
-                        <h4>Event Date: ${eventDate}</h4>
-                        <h4>Event Time: ${event.dates.start.localTime}</h4>
+                        <h4>Event Date & Time: ${eventDateTime}</h4>
                         <h4>Event Venue: ${event._embedded.venues[0].name}</h4>
                         <h4>Event Address: ${event._embedded.venues[0].address.line1}</h4>
                         <h4>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}. ${event._embedded.venues[0].postalCode}</h4>
-                    </a>
-                `
+                        </div>
+                    </a>`
             });
         }) 
 }

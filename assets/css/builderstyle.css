@@ -11,6 +11,10 @@
     background-color: var(--drk);
 }
 
+.has-text-dark-red {
+    color: var(--drk-red);
+}
+
 main {
     width: 30%;
     margin: 0 auto;
