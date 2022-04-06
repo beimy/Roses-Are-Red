@@ -9,6 +9,7 @@
 * {
     font-family: 'Bungee Hairline', cursive;
     background-color: var(--drk);
+    overflow: hidden;
 }
 
 .has-text-dark-red {
@@ -23,6 +24,27 @@ main {
 aside {
     width: 90%;
     margin: 5px;
+}
+
+.input-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.input {
+    width: 50%;
+    
+}
+
+a {
+    margin: 25px;
+}
+
+p {
+    margin: 10px;
 }
 
 .results {
