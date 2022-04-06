@@ -56,3 +56,9 @@ function fetchEvent(searchOptions) {
             });
         }) 
 }
+
+
+function AaronsFunciton() {
+
+    //this should break this page
+}
