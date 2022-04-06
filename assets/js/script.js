@@ -1,6 +1,16 @@
 // add click event listener to call search button and run handleClick function
 document.getElementById('search').addEventListener('click', eventSearch_handleClick);
 
+// set datepicker defaults globally
+$.datepicker.setDefaults($.datepicker.regional['nl']); 
+$.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
+
+// start-date date picker
+$("#start-date").datepicker();
+
+// end-date date picker
+$("#end-date").datepicker();
+
 // set search history to empty array
 searchHistory = [];
 
@@ -12,7 +22,7 @@ function eventSearch_handleClick() {
     var searchedStartDate = document.getElementById('start-date').value.trim();
     var searchedEndDate = document.getElementById('end-date').value.trim();
 
-    if(!searchedCity == "" && !searchedStartDate == "" && !searchedEndDate == "") {
+    if(searchedCity && searchedStartDate && searchedEndDate) {
         var searchOptions = {
             city: searchedCity,
             category: searchedCategory,
@@ -42,7 +52,7 @@ function eventSearch_handleClick() {
 };
 
 function fetchEvent(searchOptions) {
-    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.startDate}T12:00:01,${searchOptions.endDate}T23:59:59&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
+    let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.startDate}T00:00:01,${searchOptions.endDate}T23:59:59&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
         .then (data => {
@@ -53,7 +63,7 @@ function fetchEvent(searchOptions) {
                 // prints out in this format: April 11th, 2022 @ 7:30pm
                 eventDateTime = moment(`${event.dates.start.dateTime}`).format('MMMM Do, YYYY @ hh:mm a');
                 document.querySelector(".results").innerHTML += 
-                `<a href="${event.url}" class="card" >
+                `<a href="${event.url}" class="card">
                         <img src="${event.images[0].url}">
                         <div class="has-text-weight-bold is-size-4">
                         <h4>Event Name: ${event.name}</h4>
@@ -67,6 +77,7 @@ function fetchEvent(searchOptions) {
             });
         }) 
 }
+
 
 function fetchYelp(yelpSearch_Params) {
     let yelp_api = `https://api.yelp.com/v3/businesses/search/${yelp_api_key}`;

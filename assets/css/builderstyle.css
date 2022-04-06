@@ -41,6 +41,30 @@ aside {
 
 a {
     margin: 25px;
+    color: white;
+}
+
+.ui-datepicker {
+    border-radius: 12px;
+    border: 2px solid white;
+}
+
+table th, td {
+    color: white;
+}
+
+.ui-datepicker-month, .ui-datepicker-year {
+    color: white;
+    font-size: 30px;
+}
+
+.ui-icon {
+    font-size: 20px;
+}
+
+.ui-datepicker-header, tr {
+    text-align: center;
+    line-height: 2;
 }
 
 p {
