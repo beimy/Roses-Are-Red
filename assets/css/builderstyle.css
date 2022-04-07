@@ -30,6 +30,15 @@
     
 }
 
+.category {
+    color: white;
+}
+
+.category:hover {
+    color: var(--drk-red);
+    font-weight: bold;
+}
+
 h4 {
     font-weight: bold;
 }
@@ -38,6 +47,8 @@ a {
     margin: 25px;
     color: white;
 }
+
+
 
 .ui-datepicker {
     border-radius: 12px;

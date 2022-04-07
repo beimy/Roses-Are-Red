@@ -115,6 +115,35 @@ function eventSearch_handleClick() {
     }); 
 }
 
+document.getElementById('arts').addEventListener("click", function() {
+    document.getElementById('category').value = "";
+    document.getElementById('category').value = "Arts & Theatre";
+})
+
+document.getElementById('concerts').addEventListener("click", function() {
+    document.getElementById('category').value = "";
+    document.getElementById('category').value = "Concerts";
+})
+
+document.getElementById('family').addEventListener("click", function() {
+    document.getElementById('category').value = "";
+    document.getElementById('category').value = "Family";
+})
+
+document.getElementById('film').addEventListener("click", function() {
+    document.getElementById('category').value = "";
+    document.getElementById('category').value = "Film";
+})
+
+document.getElementById('music').addEventListener("click", function() {
+    document.getElementById('category').value = "";
+    document.getElementById('category').value = "Music";
+})
+
+document.getElementById('sports').addEventListener("click", function() {
+    document.getElementById('category').value = "";
+    document.getElementById('category').value = "Sports";
+})
 
 // function fetchYelp(yelpSearch_Params) {
 //     let yelp_api = `https://api.yelp.com/v3/businesses/search/${yelp_api_key}`;
