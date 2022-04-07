@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
 
 :root {
-    --drk: rgb(54,54,54);
+    --drk: rgb(54, 54, 54);
     /* rgb(173,16,14) */
-    --drk-red: rgb(146,12,31);
+    --drk-red: rgb(146, 12, 31);
 }
 
 * {
@@ -27,7 +27,7 @@
 
 .input {
     width: 50%;
-    
+
 }
 
 .category {
@@ -53,11 +53,13 @@ a {
     border: 2px solid white;
 }
 
-table th, td {
+table th,
+td {
     color: white;
 }
 
-.ui-datepicker-month, .ui-datepicker-year {
+.ui-datepicker-month,
+.ui-datepicker-year {
     color: var(--drk-red);
     font-weight: bold;
     font-size: 30px;
@@ -73,7 +75,8 @@ table th, td {
     font-size: 20px;
 }
 
-.ui-datepicker-header, tr {
+.ui-datepicker-header,
+tr {
     text-align: center;
     line-height: 2;
 }
@@ -98,7 +101,8 @@ p {
     margin: 0 auto;
 }
 
-.event-results, .brew-results {
+.event-results,
+.brew-results {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -117,7 +121,8 @@ p {
     text-align: center;
 }
 
-.card h4, .card a {
+.card h4,
+.card a {
     background-color: white;
 }
 
@@ -126,3 +131,16 @@ p {
     width: 100px;
     height: 100px;
 }
+
+/* .modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    border-radius: 12px;
+    border: 2px solid lightgray;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+} */

@@ -2,20 +2,20 @@
 document.getElementById('search').addEventListener('click', eventSearch_handleClick);
 
 // set datepicker defaults globally
-$.datepicker.setDefaults($.datepicker.regional['nl']); 
+$.datepicker.setDefaults($.datepicker.regional['nl']);
 $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
 
 // start-date date picker
 $("#start-date").datepicker({
     changeMonth: true,
     changeYear: true
-  });
+});
 
 // end-date date picker
 $("#end-date").datepicker({
     changeMonth: true,
     changeYear: true
-  });
+});
 
 // set search history to empty array
 searchHistory = [];
@@ -29,7 +29,7 @@ function eventSearch_handleClick() {
     var searchedEndDate = document.getElementById('end-date').value.trim();
 
     // validate search options with an if statement
-    if(searchedCity && searchedStartDate && searchedEndDate) {
+    if (searchedCity && searchedStartDate && searchedEndDate) {
         var searchOptions = {
             city: searchedCity,
             category: searchedCategory,
@@ -45,11 +45,25 @@ function eventSearch_handleClick() {
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
         };
-    
+
         localStorage.setItem("City", JSON.stringify(searchHistory));
-    } else {  
-        alert("Please enter a city, a start date, and an end date.");
-        return;
+    } else {
+
+        // modal 
+        const modalSearch = document.querySelector('#search');
+        const modalBg = document.querySelector('.modal-background');
+        const modal = document.querySelector('.modal');
+
+        modalSearch.addEventListener('click', () => {
+            modal.classList.add('is-active');
+        });
+
+        modalBg.addEventListener('click', () => {
+            modal.classList.remove('is-active');
+        })
+
+        // alert("Please enter a city, a start date, and an end date.");
+        // return;
     }
 };
 
@@ -58,12 +72,12 @@ function fetchEvent(searchOptions) {
     let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.startDate}T00:00:01,${searchOptions.endDate}T23:59:59&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
-        .then (data => {
+        .then(data => {
             let events = data._embedded.events;
             events.forEach(event => {
                 eventDateTime = moment(`${event.dates.start.dateTime}`).format('MMMM Do, YYYY @ hh:mm a');
-                document.querySelector(".event-results").innerHTML += 
-                `<a href="${event.url}" class="card">
+                document.querySelector(".event-results").innerHTML +=
+                    `<a href="${event.url}" class="card">
                         <img src="${event.images[0].url}">
                         <div class="is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Event Name:</span> ${event.name}</h4>
@@ -75,8 +89,8 @@ function fetchEvent(searchOptions) {
                         </div>
                     </a>`
             });
-        }) 
-    
+        })
+
     // fetch lat and lon from open weather map api
     let url = `https://api.openweathermap.org/geo/1.0/direct?q=${searchOptions.city}&limit=1&appid=${api_key}`
     fetch(url)
@@ -84,15 +98,15 @@ function fetchEvent(searchOptions) {
         .then(data => {
             const { lat, lon } = data[0];
 
-    // fetch brewery data from open brewery db api
-    let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=10`
-    fetch(brew_api)
-        .then(data => data.json())
-        .then (data => {
-            for (var i = 0; i <= data.length - 1; i++) {
-                console.log(data[i])
-                document.querySelector(".brew-results").innerHTML += 
-                `<a href="${data[i].website_url}" class="card">
+            // fetch brewery data from open brewery db api
+            let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=10`
+            fetch(brew_api)
+                .then(data => data.json())
+                .then(data => {
+                    for (var i = 0; i <= data.length - 1; i++) {
+                        console.log(data[i])
+                        document.querySelector(".brew-results").innerHTML +=
+                            `<a href="${data[i].website_url}" class="card">
                         <div class="is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Brewery Name:</span> ${data[i].name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Type:</span> ${data[i].brewery_type}</h4>   
@@ -100,38 +114,38 @@ function fetchEvent(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Phone Number:</span> ${data[i].phone}</h4>    
                         </div>
                     </a>`
-            }
+                    }
+                });
         });
-    }); 
 };
 
 // click listeners for category options 
-document.getElementById('arts').addEventListener("click", function() {
+document.getElementById('arts').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Arts & Theatre";
 });
 
-document.getElementById('concerts').addEventListener("click", function() {
+document.getElementById('concerts').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Concerts";
 });
 
-document.getElementById('family').addEventListener("click", function() {
+document.getElementById('family').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Family";
 });
 
-document.getElementById('film').addEventListener("click", function() {
+document.getElementById('film').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Film";
 });
 
-document.getElementById('music').addEventListener("click", function() {
+document.getElementById('music').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Music";
 });
 
-document.getElementById('sports').addEventListener("click", function() {
+document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Sports";
 });
@@ -146,3 +160,6 @@ document.getElementById('sports').addEventListener("click", function() {
 // }
 
 // fetchYelp();
+
+
+
