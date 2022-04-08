@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
 
 :root {
-    --drk: rgb(54,54,54);
+    --drk: rgb(54, 54, 54);
     /* rgb(173,16,14) */
-    --drk-red: rgb(146,12,31);
+    --drk-red: rgb(146, 12, 31);
 }
 
 * {
@@ -23,3 +23,7 @@ button {
     color: var(--drk-red);
 }
 
+.modal-background {
+    background-color: var(--drk);
+    color: var(--drk-red);
+}

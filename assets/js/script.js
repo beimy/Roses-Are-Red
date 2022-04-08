@@ -2,20 +2,20 @@
 document.getElementById('search').addEventListener('click', eventSearch_handleClick);
 
 // set datepicker defaults globally
-$.datepicker.setDefaults($.datepicker.regional['nl']); 
+$.datepicker.setDefaults($.datepicker.regional['nl']);
 $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
 
 // start-date date picker
 $("#start-date").datepicker({
     changeMonth: true,
     changeYear: true
-  });
+});
 
 // end-date date picker
 $("#end-date").datepicker({
     changeMonth: true,
     changeYear: true
-  });
+});
 
 // set search history to empty array
 searchHistory = [];
@@ -29,7 +29,7 @@ function eventSearch_handleClick() {
     var searchedEndDate = document.getElementById('end-date').value.trim();
 
     // validate search options with an if statement
-    if(searchedCity && searchedStartDate && searchedEndDate) {
+    if (searchedCity && searchedStartDate && searchedEndDate) {
         var searchOptions = {
             city: searchedCity,
             category: searchedCategory,
@@ -45,11 +45,25 @@ function eventSearch_handleClick() {
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
         };
-    
+
         localStorage.setItem("City", JSON.stringify(searchHistory));
-    } else {  
-        alert("Please enter a city, a start date, and an end date.");
-        return;
+    } else {
+
+        // modal 
+        const modalSearch = document.querySelector('#search');
+        const modalBg = document.querySelector('.modal-background');
+        const modal = document.querySelector('.modal');
+
+        modalSearch.addEventListener('click', () => {
+            modal.classList.add('is-active');
+        });
+
+        modalBg.addEventListener('click', () => {
+            modal.classList.remove('is-active');
+        })
+
+        // alert("Please enter a city, a start date, and an end date.");
+        // return;
     }
 };
 
@@ -58,7 +72,7 @@ function fetchEvent(searchOptions) {
     let ticket_api = `https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=${searchOptions.city}&localStartDateTime=${searchOptions.startDate}T00:00:01,${searchOptions.endDate}T23:59:59&classificationName=${searchOptions.category}&apikey=${ticket_api_key}`;
     fetch(ticket_api)
         .then(data => data.json())
-        .then (data => {
+        .then(data => {
             let events = data._embedded.events;
             events.forEach(event => {
                 eventDateTime = moment(`${event.dates.start.dateTime}`).format('MMMM Do, YYYY @ hh:mm a');
@@ -77,8 +91,8 @@ function fetchEvent(searchOptions) {
                         </div>
                     </div>`
             });
-        }) 
-    
+        })
+
     // fetch lat and lon from open weather map api
     let url = `https://api.openweathermap.org/geo/1.0/direct?q=${searchOptions.city}&limit=1&appid=${api_key}`
     fetch(url)
@@ -105,7 +119,8 @@ function fetchEvent(searchOptions) {
                     </div>`
             }
         });
-    }); 
+});
+
 };
 
 $(document).on( "click", function() {
@@ -114,33 +129,32 @@ $(document).on( "click", function() {
 
 
 // click listeners for category options 
-document.getElementById('arts').addEventListener("click", function() {
+document.getElementById('arts').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Arts & Theatre";
 });
 
-document.getElementById('concerts').addEventListener("click", function() {
+document.getElementById('concerts').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Concerts";
 });
 
-document.getElementById('family').addEventListener("click", function() {
+document.getElementById('family').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Family";
 });
 
-document.getElementById('film').addEventListener("click", function() {
+document.getElementById('film').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Film";
 });
 
-document.getElementById('music').addEventListener("click", function() {
+document.getElementById('music').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Music";
 });
 
-document.getElementById('sports').addEventListener("click", function() {
+document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Sports";
 });
-
