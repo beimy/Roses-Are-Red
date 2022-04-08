@@ -17,9 +17,6 @@ $("#end-date").datepicker({
     changeYear: true
 });
 
-// set search history to empty array
-searchHistory = [];
-
 // get inputs from user
 function eventSearch_handleClick() {
     // create variables for input fields
@@ -55,11 +52,6 @@ function eventSearch_handleClick() {
             $(".hero").addClass("hide");
         }
 
-        if (!searchHistory.includes(searchOptions)) {
-            searchHistory.push(searchOptions);
-        };
-
-        localStorage.setItem("City", JSON.stringify(searchHistory));
     } else {
 
         // modal 

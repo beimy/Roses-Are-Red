@@ -16,7 +16,9 @@ function selectActivity_handler() {
             address: event_obj._embedded.venues[0].address.line1,
             location: event_obj._embedded.venues[0].location,
             url: event_obj._embedded.venues[0].url,
-            type: 'event'
+            type: 'event',
+            img: event_obj.images[0].url,
+            city: event_obj._embedded.venues[0].city.name
         };
         console.log(activity_Obj);
     }
@@ -57,23 +59,53 @@ function selectActivity_handler() {
 }
 
 function buildActivityCard_Event(activity_Obj) {
-    $cardDiv = $('<div class="card" style="width: 800px;>');
-        $gutterDiv = $('<div class="row no-gutters">');
-            $imgDiv = $('<div class="col-sm-5">');
-                $img = $('<img class="card-img" src="">');
-                //add code to add img
+    $cardDiv = $('<div>').addClass("card");
+    $cardDiv.css({"width" : "800px"});
+    
+        $gutterDiv = $('<div>').addClass('row no-gutters');
+            $imgDiv = $('<div>').addClass('col-sm-5');
+                $img = $('<img>').addClass('card-img');
+                $img.attr("src" , `${activity_Obj.img}`);
             $imgDiv.append($img);
         $gutterDiv.append($imgDiv);
 
-        $holderDiv = $('<div class="col-sm-7>');
-            $cardBody = $('<div class="card-body">');
-                $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
+        $holderDiv = $('<div>').addClass('col-sm-7');
+            $cardBody = $('<div>').addClass('card-body');
+                $name = $(`<p id="activity-name">${activity_Obj.name}</p>`).addClass("text-white");
                 $time = $(`<p class="text-white" id="activity-time">${activity_Obj.time}</p>`);
                 $venue = $(`<p class="text-white" id="activity-venue">${activity_Obj.venue}</p>`);
                 $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
-                $link = $(`<a id="activity-link" href="${activity_Obj.url}">TICKET LINK</a>`);
-                
+                $link = $(`<a id="activity-link" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
+            $cardBody.append($name);
+            $cardBody.append($time);
+            $cardBody.append($venue);
+            $cardBody.append($address);
+            $cardBody.append($link);
+        $holderDiv.append($cardBody);
+        $cardDiv.append($gutterDiv);
+        $cardDiv.append($holderDiv);
 
+        console.log($cardDiv)
+        
+        $('.activity-list').append($cardDiv);
 
+        
 
 }
+
+function loadLocalItinerary() {
+    let itinerary = JSON.parse(localStorage.getItem('active-itinerary'));
+    console.log(itinerary);
+    
+    for(var i = 0; i < Object.keys(itinerary).length; i++){
+        buildActivityCard_Event(`${itinerary.keys}`);
+    }
+
+    // itinerary.forEach(activity => {
+    //     console.log(activity)
+    // })
+}
+
+
+loadLocalItinerary();
+// buildActivityCard_Event(JSON.parse(localStorage.getItem("active-activity-obj")));
