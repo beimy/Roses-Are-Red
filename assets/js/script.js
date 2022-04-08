@@ -88,7 +88,7 @@ function fetchEvent(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Event Address:</span> ${event._embedded.venues[0].address.line1}</h4>
                         <h4>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}. ${event._embedded.venues[0].postalCode}</h4>
                         <a href=${event.url} target="_blank">Get Tickets Here</a>
-                        <button type="button" class='activity_select_btn'>Add Event</button>
+                        <button type="button" class='activity-select-btn'>Add Event</button>
                         </div>
                     </div>`
             });
@@ -116,7 +116,7 @@ function fetchEvent(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Address:</span> ${data[i].street}, ${data[i].city}, ${data[i].state}. ${data[i].postal_code}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Phone Number:</span> ${data[i].phone}</h4> 
                         <a href="${data[i].website_url}">Breweries Page</a>  
-                        <button type="button" class='activity_select_btn'>Add Event</button> 
+                        <button type="button" class='activity-select-btn'>Add Event</button> 
                         </div>
                     </div>`
             }
@@ -157,4 +157,4 @@ document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "Sports";
 });
 
-$(document).on( "click", '.activity_select_btn', selectActivity_handler);
+$(document).on( "click", '.activity-select-btn', selectActivity_handler);
