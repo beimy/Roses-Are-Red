@@ -32,7 +32,9 @@ function selectActivity_handler() {
             city: event_obj.city,
             location: {longitude: event_obj.longitude, latitude: event_obj.latitude},
             phoneNumber: event_obj.phone,
-            url: event_obj.url
+            url: event_obj.url,
+            brewType: event_obj.brewery_type,
+            type: 'brewery'
         }
         console.log(activity_Obj)
         console.log("Activity is resturant")
@@ -61,7 +63,7 @@ function selectActivity_handler() {
 function buildActivityCard_Event(activity_Obj) {
     $cardDiv = $('<div>').addClass("card");
     $cardDiv.css({"width" : "800px"});
-    
+
         $gutterDiv = $('<div>').addClass('row no-gutters');
             $imgDiv = $('<div>').addClass('col-sm-5');
                 $img = $('<img>').addClass('card-img');
@@ -71,7 +73,7 @@ function buildActivityCard_Event(activity_Obj) {
 
         $holderDiv = $('<div>').addClass('col-sm-7');
             $cardBody = $('<div>').addClass('card-body');
-                $name = $(`<p id="activity-name">${activity_Obj.name}</p>`).addClass("text-white");
+                $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
                 $time = $(`<p class="text-white" id="activity-time">${activity_Obj.time}</p>`);
                 $venue = $(`<p class="text-white" id="activity-venue">${activity_Obj.venue}</p>`);
                 $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
@@ -81,31 +83,66 @@ function buildActivityCard_Event(activity_Obj) {
             $cardBody.append($venue);
             $cardBody.append($address);
             $cardBody.append($link);
+
         $holderDiv.append($cardBody);
         $cardDiv.append($gutterDiv);
         $cardDiv.append($holderDiv);
-
-        console.log($cardDiv)
         
-        $('.activity-list').append($cardDiv);
+    $('.activity-list').append($cardDiv);
+}
 
-        
+function buildActivityCard_Brewery(activity_Obj){
+    $cardDiv = $('<div>').addClass("card");
+    $cardDiv.css({"width" : "800px"});
 
+        //used for adding img's
+        // $gutterDiv = $('<div>').addClass('row no-gutters');
+        //     $imgDiv = $('<div>').addClass('col-sm-5');
+        //         $img = $('<img>').addClass('card-img');
+        //         $img.attr("src" , `${activity_Obj.img}`);
+        //     $imgDiv.append($img);
+        // $gutterDiv.append($imgDiv);
+
+        $holderDiv = $('<div>').addClass('col-sm-7');
+            $cardBody = $('<div>').addClass('card-body');
+                $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
+                $time = $(`<p class="text-white" id="activity-time">OPENS AT:<span id="opens">0:00</span> CLOSES AT:<span id="closes">12:00</span></p>`);
+                $brewType = $(`<p class="text-white" id="activity-brew-type">${activity_Obj.brewType}</p>`);
+                $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
+                $link = $(`<a id="activity-link" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
+            $cardBody.append($name);
+            $cardBody.append($time);
+            $cardBody.append($brewType);
+            $cardBody.append($address);
+            $cardBody.append($link);
+
+        $holderDiv.append($cardBody);
+        // $cardDiv.append($gutterDiv);
+        $cardDiv.append($holderDiv);
+
+    $('.activity-list').append($cardDiv);
 }
 
 function loadLocalItinerary() {
     let itinerary = JSON.parse(localStorage.getItem('active-itinerary'));
-    console.log(itinerary);
     
-    for(var i = 0; i < Object.keys(itinerary).length; i++){
-        buildActivityCard_Event(`${itinerary.keys}`);
+    var i = 1;
+    for(var activity in itinerary) {
+        if(itinerary.hasOwnProperty(activity)){
+            if(itinerary[i].type == 'event'){
+                buildActivityCard_Event(itinerary[i])
+                console.log('building event card');
+            }
+            else if(itinerary[i].type == 'brewery'){
+                buildActivityCard_Brewery(itinerary[i]);
+                console.log('building brewery card');
+            } 
+            else{console.log('type returned wrong')};
+        }
+        i++;
     }
-
-    // itinerary.forEach(activity => {
-    //     console.log(activity)
-    // })
 }
 
 
-// loadLocalItinerary();
-buildActivityCard_Event(JSON.parse(localStorage.getItem("active-activity-obj")));
+loadLocalItinerary();
+// buildActivityCard_Event(JSON.parse(localStorage.getItem("active-activity-obj")));
