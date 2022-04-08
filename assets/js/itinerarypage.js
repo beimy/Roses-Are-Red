@@ -55,3 +55,25 @@ function selectActivity_handler() {
     }
     return activity_Obj;
 }
+
+function buildActivityCard_Event(activity_Obj) {
+    $cardDiv = $('<div class="card" style="width: 800px;>');
+        $gutterDiv = $('<div class="row no-gutters">');
+            $imgDiv = $('<div class="col-sm-5">');
+                $img = $('<img class="card-img" src="">');
+                //add code to add img
+            $imgDiv.append($img);
+        $gutterDiv.append($imgDiv);
+
+        $holderDiv = $('<div class="col-sm-7>');
+            $cardBody = $('<div class="card-body">');
+                $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
+                $time = $(`<p class="text-white" id="activity-time">${activity_Obj.time}</p>`);
+                $venue = $(`<p class="text-white" id="activity-venue">${activity_Obj.venue}</p>`);
+                $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
+                $link = $(`<a id="activity-link" href="${activity_Obj.url}">TICKET LINK</a>`);
+                
+
+
+
+}
