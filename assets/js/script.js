@@ -38,7 +38,6 @@ function eventSearch_handleClick() {
         }
 
         var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
-        console.log(activitySelector);
 
         if (activitySelector == "events") {
             fetchEvent(searchOptions);
@@ -55,9 +54,6 @@ function eventSearch_handleClick() {
             document.getElementById('end-date').value = "";
             $(".hero").addClass("hide");
         }
-
-
-       
 
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
@@ -173,6 +169,16 @@ document.getElementById('music').addEventListener("click", function () {
 document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Sports";
+});
+
+$(document).on("click", "#events", () =>  {
+    $(".category-unhide").removeClass("hide");
+    $(".category-unhide").addClass("input-box");
+});
+
+$(document).on("click", "#breweries", () =>  {
+    $(".category-unhide").addClass("hide");
+    $(".category-unhide").removeClass("input-box");
 });
 
 $(document).on( "click", '.activity-select-btn', selectActivity_handler);

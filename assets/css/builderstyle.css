@@ -148,3 +148,49 @@ p {
     padding: 5px;
     text-align: center;
 }
+
+.radio-wrapper input {
+    opacity: 0;
+}
+
+.radio-wrapper label {
+    position: relative;
+    left: 10px;
+    margin: 10px;
+    line-height: 1.6;
+}
+
+.radio-wrapper label::before {
+    content: "";
+    height: 20px;
+    width: 20px;
+    background: var(--drk);
+    border: 1px solid var(--drk-red);
+    position: absolute;
+    top: -4px;
+    left: -30px;
+}
+
+.radio-wrapper label::before {
+    border-radius: 50%;
+}
+
+.radio-wrapper label::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--drk-red);
+    position: absolute;
+    left: -29px;
+    top: -3px;
+    background-image: radial-gradient(circle, var(--drk-red), var(--drk));
+}
+
+.radio-wrapper input + label::after {
+    content: none;
+}
+
+.radio-wrapper input:checked + label::after{
+    content: "";
+}
