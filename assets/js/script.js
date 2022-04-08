@@ -171,4 +171,14 @@ document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "Sports";
 });
 
+$(document).on("click", "#events", () =>  {
+    $(".category-unhide").removeClass("hide");
+    $(".category-unhide").addClass("input-box");
+});
+
+$(document).on("click", "#breweries", () =>  {
+    $(".category-unhide").addClass("hide");
+    $(".category-unhide").removeClass("input-box");
+});
+
 $(document).on( "click", '.activity-select-btn', selectActivity_handler);
