@@ -36,11 +36,28 @@ function eventSearch_handleClick() {
             startDate: searchedStartDate,
             endDate: searchedEndDate
         }
-        fetchEvent(searchOptions);
-        document.getElementById('city').value = "";
-        document.getElementById('category').value = "";
-        document.getElementById('start-date').value = "";
-        document.getElementById('end-date').value = "";
+
+        var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
+        console.log(activitySelector);
+
+        if (activitySelector == "events") {
+            fetchEvent(searchOptions);
+            document.getElementById('city').value = "";
+            document.getElementById('category').value = "";
+            document.getElementById('start-date').value = "";
+            document.getElementById('end-date').value = "";
+            $(".hero").addClass("hide");
+        } else if (activitySelector == "breweries") {
+            fetchBrew(searchOptions);
+            document.getElementById('city').value = "";
+            document.getElementById('category').value = "";
+            document.getElementById('start-date').value = "";
+            document.getElementById('end-date').value = "";
+            $(".hero").addClass("hide");
+        }
+
+
+       
 
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
@@ -93,7 +110,9 @@ function fetchEvent(searchOptions) {
                     </div>`
             });
         })
+};
 
+function fetchBrew(searchOptions) {
     // fetch lat and lon from open weather map api
     let url = `https://api.openweathermap.org/geo/1.0/direct?q=${searchOptions.city}&limit=1&appid=${api_key}`
     fetch(url)
@@ -121,7 +140,7 @@ function fetchEvent(searchOptions) {
             }
         });
     });
-};
+}
 
 
 // click listeners for category options 
@@ -153,6 +172,16 @@ document.getElementById('music').addEventListener("click", function () {
 document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "";
     document.getElementById('category').value = "Sports";
+});
+
+$(document).on("click", "#events", () =>  {
+    $(".category-unhide").removeClass("hide");
+    $(".category-unhide").addClass("input-box");
+});
+
+$(document).on("click", "#breweries", () =>  {
+    $(".category-unhide").addClass("hide");
+    $(".category-unhide").removeClass("input-box");
 });
 
 $(document).on( "click", ".activity-select-btn", selectActivity_handler);

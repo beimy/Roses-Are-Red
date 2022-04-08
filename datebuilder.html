@@ -16,12 +16,23 @@
         <div class="hero-body">
             <div class="container">
                 <div class="has-text-centered">
+
+                    <div class="input-box">
+                        <label class="has-text-white is-size-3">Select Type of<span
+                                class="has-text-dark-red has-text-weight-bold">Activity:</span></label>
+                        <p class="has-text-white is-size-5 m-0 mb-2">
+                            <input type="radio" class="category" name="event-click" value="events" id="events">Events</input>
+                            <input type="radio" class="category" name="event-click" value="breweries" id="breweries">Breweries</input>
+                        </p>
+                    </div>
+
                     <div class="input-box">
                         <label class="has-text-white is-size-3">*Enter <span
                                 class="has-text-dark-red has-text-weight-bold">City:</span></label>
                         <input class="input is-rounded" type="text" id="city" placeholder="i.e. Orlando">
                     </div>
-                    <div class="input-box">
+
+                    <div class="hide category-unhide">
                         <label class="has-text-white is-size-3">Select a <span
                                 class="has-text-dark-red has-text-weight-bold">Category:</span></label>
                         <p class="has-text-white is-size-5 m-0 mb-2">
@@ -34,6 +45,7 @@
                         </p>
                         <input class="input is-rounded" type="text" id="category" placeholder="i.e. Music">
                     </div>
+
                     <div class="input-box">
                         <label class="has-text-white is-size-3">*Enter <span
                                 class="has-text-dark-red has-text-weight-bold">Date:</span></label>
@@ -76,7 +88,7 @@
     <script src="./assets/js/config.js"></script>
     <script src="./assets/js/itinerarypage.js"></script>
     <script src="./assets/js/script.js"></script>
-    
+
 </body>
 
 </html>

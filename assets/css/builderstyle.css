@@ -12,6 +12,10 @@
     overflow: hidden;
 }
 
+.hide {
+    display: none;
+}
+
 .has-text-dark-red {
     color: var(--drk-red);
 }
