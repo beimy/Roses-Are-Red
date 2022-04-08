@@ -107,5 +107,5 @@ function loadLocalItinerary() {
 }
 
 
-loadLocalItinerary();
-// buildActivityCard_Event(JSON.parse(localStorage.getItem("active-activity-obj")));
+// loadLocalItinerary();
+buildActivityCard_Event(JSON.parse(localStorage.getItem("active-activity-obj")));
