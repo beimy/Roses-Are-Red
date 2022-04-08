@@ -75,9 +75,10 @@ function fetchEvent(searchOptions) {
         .then(data => {
             let events = data._embedded.events;
             events.forEach(event => {
+                console.log(event);
                 eventDateTime = moment(`${event.dates.start.dateTime}`).format('MMMM Do, YYYY @ hh:mm a');
                 document.querySelector(".event-results").innerHTML += 
-                `<div class="card">
+                `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(event))}>
                         <img src="${event.images[0].url}">
                         <div class="is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Event Name:</span> ${event.name}</h4>
@@ -108,7 +109,7 @@ function fetchEvent(searchOptions) {
             for (var i = 0; i <= data.length - 1; i++) {
                 console.log(data[i])
                 document.querySelector(".brew-results").innerHTML += 
-                `<div class="card">
+                `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(data[i]))}>
                         <div class="is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Brewery Name:</span> ${data[i].name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Type:</span> ${data[i].brewery_type}</h4>   

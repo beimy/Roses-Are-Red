@@ -1,3 +1,6 @@
+//handles event data passing into the itinerary
 function selectActivity_handler() {
-    console.log('entered select activity');
+    this.style.backgroundColor = 'red';
+    var data_str = $(this);
+    console.log(data_str);
 }
