@@ -100,8 +100,8 @@ function fetchEvent(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Event Venue:</span> ${event._embedded.venues[0].name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Event Address:</span> ${event._embedded.venues[0].address.line1}</h4>
                         <h4>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}. ${event._embedded.venues[0].postalCode}</h4>
-                        <a href=${event.url} target="_blank">Get Tickets Here</a>
-                        <button type="button" class='activity-select-btn'>Add Event</button>
+                        <a type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-dark is-small is-responsive" href=${event.url} target="_blank">Get Tickets Here</a>
+                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold">Add To Itinerary</a>
                         </div>
                     </div>`
             });
@@ -130,8 +130,8 @@ function fetchBrew(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Type:</span> ${data[i].brewery_type}</h4>   
                         <h4><span class="has-text-dark-red has-background-white">Address:</span> ${data[i].street}, ${data[i].city}, ${data[i].state}. ${data[i].postal_code}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Phone Number:</span> ${data[i].phone}</h4> 
-                        <a href="${data[i].website_url}">Breweries Page</a>  
-                        <button type="button" class='activity-select-btn'>Add Event</button> 
+                        <a type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-dark is-small is-responsive" href="${data[i].website_url}" target="_blank">Brewery Site</a>
+                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold">Add To Itinerary</a>
                         </div>
                     </div>`
             }
