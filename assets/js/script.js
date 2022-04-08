@@ -174,11 +174,15 @@ document.getElementById('sports').addEventListener("click", function () {
 $(document).on("click", "#events", () =>  {
     $(".category-unhide").removeClass("hide");
     $(".category-unhide").addClass("input-box");
+    $(".radio-wrapper").find("label[for='breweries']").removeClass("has-text-dark-red has-text-weight-bold");
+    $(".radio-wrapper").find("label[for='events']").addClass("has-text-dark-red has-text-weight-bold");
 });
 
 $(document).on("click", "#breweries", () =>  {
     $(".category-unhide").addClass("hide");
     $(".category-unhide").removeClass("input-box");
+    $(".radio-wrapper").find("label[for='events']").removeClass("has-text-dark-red has-text-weight-bold");
+    $(".radio-wrapper").find("label[for='breweries']").addClass("has-text-dark-red has-text-weight-bold");
 });
 
 $(document).on( "click", '.activity-select-btn', selectActivity_handler);

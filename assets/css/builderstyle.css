@@ -149,10 +149,19 @@ p {
     text-align: center;
 }
 
+
+
 .radio-wrapper input {
     opacity: 0;
 }
 
+.radio-wrapper label:hover {
+    color: var(--drk-red);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 
 .radio-wrapper label {
     position: relative;
     left: 10px;
@@ -193,4 +202,4 @@ p {
 
 .radio-wrapper input:checked + label::after{
     content: "";
-}
+} */
