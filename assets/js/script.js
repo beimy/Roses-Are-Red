@@ -36,11 +36,28 @@ function eventSearch_handleClick() {
             startDate: searchedStartDate,
             endDate: searchedEndDate
         }
-        fetchEvent(searchOptions);
-        document.getElementById('city').value = "";
-        document.getElementById('category').value = "";
-        document.getElementById('start-date').value = "";
-        document.getElementById('end-date').value = "";
+
+        var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
+        console.log(activitySelector);
+
+        if (activitySelector == "events") {
+            fetchEvent(searchOptions);
+            document.getElementById('city').value = "";
+            document.getElementById('category').value = "";
+            document.getElementById('start-date').value = "";
+            document.getElementById('end-date').value = "";
+            $(".hero").addClass("hide");
+        } else if (activitySelector == "breweries") {
+            fetchBrew(searchOptions);
+            document.getElementById('city').value = "";
+            document.getElementById('category').value = "";
+            document.getElementById('start-date').value = "";
+            document.getElementById('end-date').value = "";
+            $(".hero").addClass("hide");
+        }
+
+
+       
 
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
@@ -80,7 +97,7 @@ function fetchEvent(searchOptions) {
                 document.querySelector(".event-results").innerHTML += 
                 `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(event))}>
                         <img src="${event.images[0].url}">
-                        <div class="is-size-6">
+                        <div class="has-background-white is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Event Name:</span> ${event.name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Event Classification:</span> ${event.classifications[0].segment.name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Event Date & Time:</span> ${eventDateTime}</h4>
@@ -93,7 +110,9 @@ function fetchEvent(searchOptions) {
                     </div>`
             });
         })
+};
 
+function fetchBrew(searchOptions) {
     // fetch lat and lon from open weather map api
     let url = `https://api.openweathermap.org/geo/1.0/direct?q=${searchOptions.city}&limit=1&appid=${api_key}`
     fetch(url)
@@ -110,7 +129,7 @@ function fetchEvent(searchOptions) {
                 console.log(data[i])
                 document.querySelector(".brew-results").innerHTML += 
                 `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(data[i]))}>
-                        <div class="is-size-6">
+                        <div class="has-background-white is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Brewery Name:</span> ${data[i].name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Type:</span> ${data[i].brewery_type}</h4>   
                         <h4><span class="has-text-dark-red has-background-white">Address:</span> ${data[i].street}, ${data[i].city}, ${data[i].state}. ${data[i].postal_code}</h4>
@@ -121,9 +140,8 @@ function fetchEvent(searchOptions) {
                     </div>`
             }
         });
-});
-
-};
+    });
+}
 
 
 // click listeners for category options 
