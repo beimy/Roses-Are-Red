@@ -132,7 +132,7 @@ p {
     height: 100px;
 }
 
-/* .modal {
+.modal-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,4 +143,4 @@ p {
     margin: 5px;
     padding: 5px;
     text-align: center;
-} */
+}
