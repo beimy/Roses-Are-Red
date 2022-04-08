@@ -38,7 +38,6 @@ function eventSearch_handleClick() {
         }
 
         var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
-        console.log(activitySelector);
 
         if (activitySelector == "events") {
             fetchEvent(searchOptions);
@@ -55,9 +54,6 @@ function eventSearch_handleClick() {
             document.getElementById('end-date').value = "";
             $(".hero").addClass("hide");
         }
-
-
-       
 
         if (!searchHistory.includes(searchOptions)) {
             searchHistory.push(searchOptions);
