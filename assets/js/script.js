@@ -82,8 +82,8 @@ function fetchEvent(searchOptions) {
             events.forEach(event => {
                 console.log(event);
                 eventDateTime = moment(`${event.dates.start.dateTime}`).format('MMMM Do, YYYY @ hh:mm a');
-                document.querySelector(".event-results").innerHTML += 
-                `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(event))}>
+                document.querySelector(".event-results").innerHTML +=
+                    `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(event))}>
                         <img src="${event.images[0].url}">
                         <div class="has-background-white is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Event Name:</span> ${event.name}</h4>
@@ -108,15 +108,15 @@ function fetchBrew(searchOptions) {
         .then(data => {
             const { lat, lon } = data[0];
 
-    // fetch brewery data from open brewery db api
-    let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=10`
-    fetch(brew_api)
-        .then(data => data.json())
-        .then (data => {
-            for (var i = 0; i <= data.length - 1; i++) {
-                console.log(data[i])
-                document.querySelector(".brew-results").innerHTML += 
-                `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(data[i]))}>
+            // fetch brewery data from open brewery db api
+            let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=10`
+            fetch(brew_api)
+                .then(data => data.json())
+                .then(data => {
+                    for (var i = 0; i <= data.length - 1; i++) {
+                        console.log(data[i])
+                        document.querySelector(".brew-results").innerHTML +=
+                            `<div class="card" data-activity-obj=${encodeURIComponent(JSON.stringify(data[i]))}>
                         <div class="has-background-white is-size-6">
                         <h4><span class="has-text-dark-red has-background-white">Brewery Name:</span> ${data[i].name}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Type:</span> ${data[i].brewery_type}</h4>   
@@ -126,9 +126,9 @@ function fetchBrew(searchOptions) {
                         <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold">Add To Itinerary</a>
                         </div>
                     </div>`
-            }
+                    }
+                });
         });
-    });
 }
 
 
@@ -163,18 +163,18 @@ document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "Sports";
 });
 
-$(document).on("click", "#events", () =>  {
+$(document).on("click", "#events", () => {
     $(".category-unhide").removeClass("hide");
     $(".category-unhide").addClass("input-box");
     $(".radio-wrapper").find("label[for='breweries']").removeClass("has-text-dark-red has-text-weight-bold");
     $(".radio-wrapper").find("label[for='events']").addClass("has-text-dark-red has-text-weight-bold");
 });
 
-$(document).on("click", "#breweries", () =>  {
+$(document).on("click", "#breweries", () => {
     $(".category-unhide").addClass("hide");
     $(".category-unhide").removeClass("input-box");
     $(".radio-wrapper").find("label[for='events']").removeClass("has-text-dark-red has-text-weight-bold");
     $(".radio-wrapper").find("label[for='breweries']").addClass("has-text-dark-red has-text-weight-bold");
 });
 
-$(document).on( "click", '.activity-select-btn', selectActivity_handler);
+$(document).on("click", '.activity-select-btn', selectActivity_handler);
