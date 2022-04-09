@@ -165,6 +165,7 @@ document.getElementById('sports').addEventListener("click", function () {
     document.getElementById('category').value = "Sports";
 });
 
+// hide and unhide input fields depending on which type of activity is selected
 $(document).on("click", "#events", () => {
     $(".category-unhide").removeClass("hide");
     $(".category-unhide").addClass("input-box");
@@ -181,9 +182,9 @@ $(document).on("click", "#breweries", () => {
     $(".radio-wrapper").find("label[for='breweries']").addClass("has-text-dark-red has-text-weight-bold");
 });
 
-$(document).on("click", "#unhide-input-hero", () => {
+// refreshes page when new search button clicked
+$(document).on("click", "#reload-input-hero", () => {
     location.reload();
-    // $(".hero").removeClass("hide");
 });
 
 $(document).on("click", '.activity-select-btn', selectActivity_handler);
