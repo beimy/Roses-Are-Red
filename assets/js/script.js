@@ -66,7 +66,7 @@ function eventSearch_handleClick() {
 
         modalBg.addEventListener('click', () => {
             modal.classList.remove('is-active');
-        })
+        });
     }
 };
 
@@ -179,6 +179,11 @@ $(document).on("click", "#breweries", () => {
     $(".end-date").addClass("hide");
     $(".radio-wrapper").find("label[for='events']").removeClass("has-text-dark-red has-text-weight-bold");
     $(".radio-wrapper").find("label[for='breweries']").addClass("has-text-dark-red has-text-weight-bold");
+});
+
+$(document).on("click", "#unhide-input-hero", () => {
+    location.reload();
+    // $(".hero").removeClass("hide");
 });
 
 $(document).on("click", '.activity-select-btn', selectActivity_handler);

@@ -31,6 +31,14 @@ html {
     font-weight: bold;
 }
 
+.new-search, .warning {
+    color: white;
+}
+
+.new-search:hover, .warning:hover {
+    color: var(--drk-red);
+    font-weight: bold;
+}
 
 button {
     cursor: pointer;
@@ -121,4 +129,17 @@ button {
 /* background color of the content in dropdown */
 .dropdown:hover .dropbtn {
     background-color: var(--drk);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    border-radius: 12px;
+    border: 2px solid lightgray;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
 }

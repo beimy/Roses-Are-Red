@@ -111,56 +111,42 @@
             </header>
         </div> -->
 
-        <nav class="navbar">
-            <div class="container m-5">
-                        <a href="./index.html"><span class="is-size-3 roses">Roses Are Red</span></a>
+    <nav class="navbar">
+        <div class="container m-5">
+            <a href="./index.html"><span class="is-size-3 roses">Roses Are Red</span></a>
+        </div>
+        <a href="./datebuilder.html" class="has-text-centered new-search m-5" id="new-search">New Search</a>
+        <a class="has-text-centered warning mt-3 mr-3" id="warning"><span class="oi oi-warning m-5"></span></a>
+    </nav>
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+        <div class="container">
+            <!--Activity Card List-->
+            <h1 class="has-text-white has-text-centered is-size-1 mt-3">Your <span
+                    class="has-text-dark-red has-text-weight-bold">Itinerary</span></h1>
+            <label for="dropdown" class="has-text-white has-text-weight-bold has-text-centered label mb-4">Select
+                Date:</label>
+            <div id="dropdown" class="dropdown">
+                <button class="dropbtn button is-light">/</button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
                 </div>
-            </nav>
-        <!-- Hero content: will be in the middle -->
-        <div class="hero-body">
-            <div class="container">
-                <!--Activity Card List-->
-                <h1 class="has-text-white has-text-centered is-size-1 mt-3">Your <span
-                        class="has-text-dark-red has-text-weight-bold">Itinerary</span></h1>
-                <label for="dropdown" class="has-text-white has-text-weight-bold has-text-centered label mb-4">Select
-                    Date:</label>
-                <div id="dropdown" class="dropdown">
-                    <button class="dropbtn button is-light">/</button>
-                    <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
 
-                </div>
-                <hr>
-                <div class="activity-list card mt-5">
-                    <div class="col-sm-5">
-                        <img class="card-img" src="./assets/images/placeholderIMG_concert.jpg">
-                        <div class="col-sm-7">
-                            <h4 class="has-text-weight-bold has-text-white" id="activity-name">CONCERT NAME</h4>
-                            <h4 class="has-text-weight-bold has-text-white" id="activity-time">STARTS AT</h4>
-                            <h4 class="has-text-weight-bold has-text-white" id="activity-venue">VENUE</h4>
-                            <h4 class="has-text-weight-bold has-text-white" id="activity-address">ADDRESS</h4>
-                            <a id="activity-link" type="button"
-                                class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small is-responsive"
-                                href="" target="_blank">TICKET LINK</a>
-                            <a id="activity-link" type="button"
-                                class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small is-responsive"
-                                href="" target="_blank">REMOVE<span
-                                    class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-list card mt-5">
+            </div>
+            <hr>
+            <div class="activity-list card mt-5">
+                <div class="col-sm-5">
+                    <img class="card-img" src="./assets/images/placeholderIMG_concert.jpg">
                     <div class="col-sm-7">
-                        <h4 class="has-text-weight-bold has-text-white" id="activity-name">BREWERY NAME</h4>
-                        <h4 class="has-text-weight-bold has-text-white" id="activity-time">BREWERY TYPE</h4>
+                        <h4 class="has-text-weight-bold has-text-white" id="activity-name">CONCERT NAME</h4>
+                        <h4 class="has-text-weight-bold has-text-white" id="activity-time">STARTS AT</h4>
+                        <h4 class="has-text-weight-bold has-text-white" id="activity-venue">VENUE</h4>
                         <h4 class="has-text-weight-bold has-text-white" id="activity-address">ADDRESS</h4>
-                        <h4 class="has-text-weight-bold has-text-white" id="activity-address">PHONE NUMBER</h4>
                         <a id="activity-link" type="button"
                             class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small is-responsive"
-                            href="" target="_blank">WEBSITE</a>
+                            href="" target="_blank">TICKET LINK</a>
                         <a id="activity-link" type="button"
                             class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small is-responsive"
                             href="" target="_blank">REMOVE<span
@@ -168,22 +154,45 @@
                     </div>
                 </div>
             </div>
+            <div class="activity-list card mt-5">
+                <div class="col-sm-7">
+                    <h4 class="has-text-weight-bold has-text-white" id="activity-name">BREWERY NAME</h4>
+                    <h4 class="has-text-weight-bold has-text-white" id="activity-time">BREWERY TYPE</h4>
+                    <h4 class="has-text-weight-bold has-text-white" id="activity-address">ADDRESS</h4>
+                    <h4 class="has-text-weight-bold has-text-white" id="activity-address">PHONE NUMBER</h4>
+                    <a id="activity-link" type="button"
+                        class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small is-responsive"
+                        href="" target="_blank">WEBSITE</a>
+                    <a id="activity-link" type="button"
+                        class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small is-responsive"
+                        href="" target="_blank">REMOVE<span
+                            class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!--Modal-->
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <h1 class="has-text-white has-text-weight-bold is-size-1"><span class="oi oi-warning m-2"></span>Warning!</h1><p class="title mb-3 has-text-white is-size-4">Are you sure you want to delete all of your itineraries?</p>
+            <div>
+            <a class="button is-light is-normal is-responsive has-text-weight-semibold mb-3 btn btn-dark" type="button" id="delete-all">Delete All</a>
+            <!-- <a class="button is-light is-normal is-responsive has-text-weight-semibold mb-3 btn btn-dark" type="button" id="cancel">Cancel</a> -->
+            </div>
+        </div>
+    </div>
 
 
 
 
-
-
-
-
-
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="./assets/js/config.js"></script>
-        <script src="./assets/js/script.js"></script>
-        <script src="./assets/js/itinerarypage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/itinerarypage.js"></script>
 
 </body>
 

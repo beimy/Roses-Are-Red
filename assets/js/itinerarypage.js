@@ -194,4 +194,15 @@ loadLocalItinerary();
 saveActiveItinerary();
 
 
+const modalSearch = document.querySelector('#warning');
+        const modalBg = document.querySelector('.modal-background');
+        const modal = document.querySelector('.modal');
+
+        modalSearch.addEventListener('click', () => {
+            modal.classList.add('is-active');
+        });
+
+        modalBg.addEventListener('click', () => {
+            modal.classList.remove('is-active');
+        });
 
