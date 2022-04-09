@@ -10,14 +10,25 @@
 }
 
 * {
-    font-family: 'Advent Pro', sans-serif;
-    font-family: 'Rock Salt', cursive;
     font-family: 'Bungee Hairline', cursive;
     background-color: var(--drk);
 }
 
 html {
     background-color: var(--drk);
+}
+
+.navbar {
+    background-color: var(--drk);
+}
+
+.roses {
+    color: white;
+}
+
+.roses:hover {
+    color: var(--drk-red);
+    font-weight: bold;
 }
 
 
@@ -29,33 +40,55 @@ button {
     color: var(--drk-red);
 }
 
-.card {
+/* .card {
     background-color: var(--drk);
     border: solid #ffffff;
+} */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    border-radius: 12px;
+    border: 2px solid lightgray;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    background-color: var(--drk);
 }
 
+.card:hover {
+    border: 2px solid var(--drk-red);
+}
 
+.card h4,
+.card a {
+    background-color: var(--drk);
+}
 
-
-.time {}
-
-
-.location {}
+.card img {
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+}
 
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: var(--drk);
-    color: white;
     padding: 16px;
     font-size: 16px;
+    font-weight: bold;
     border: none;
+    font-family: 'Bungee Hairline', cursive;
 }
 
 /* The container */
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
 }
 
 /* Dropdown Content */
