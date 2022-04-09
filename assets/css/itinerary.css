@@ -3,18 +3,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap');
 
 
- :root {
-    --drk: rgb(54,54,54); 
+:root {
+    --drk: rgb(54, 54, 54);
     /* rgb: (173,16,14); */
-     --drk-red: rgb(146,12,31);
+    --drk-red: rgb(146, 12, 31);
 }
 
-* { 
-     font-family: 'Advent Pro', sans-serif; 
-     font-family: 'Rock Salt', cursive; 
-     font-family: 'Bungee Hairline', cursive;
-     background-color: var(--drk);
+* {
+    font-family: 'Advent Pro', sans-serif;
+    font-family: 'Rock Salt', cursive;
+    font-family: 'Bungee Hairline', cursive;
+    background-color: var(--drk);
 }
+
+html {
+    background-color: var(--drk);
+}
+
 
 button {
     cursor: pointer;
@@ -24,3 +29,7 @@ button {
     color: var(--drk-red);
 }
 
+.card {
+    background-color: var(--drk);
+    border: solid #ffffff;
+}
