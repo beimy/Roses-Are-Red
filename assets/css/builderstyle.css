@@ -96,7 +96,7 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
+
 }
 
 .results {
@@ -106,7 +106,8 @@ main {
     margin: 50px 0;
 }
 
-.event-results, .brew-results {
+.event-results,
+.brew-results {
     width: 70%;
 }
 
@@ -129,11 +130,14 @@ main {
     margin: 5px;
     padding: 5px;
     text-align: center;
+    background-color: var(--drk);
+    color: #ffffff;
+    font-weight: bold;
 }
 
 .card h4,
 .card a {
-    background-color: white;
+    background-color: var(--drk-red);
 }
 
 .card img {
