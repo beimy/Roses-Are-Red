@@ -18,7 +18,8 @@ function selectActivity_handler() {
             url: event_obj._embedded.venues[0].url,
             type: 'event',
             img: event_obj.images[0].url,
-            city: event_obj._embedded.venues[0].city.name
+            city: event_obj._embedded.venues[0].city.name,
+            activityDate: JSON.parse(localStorage.getItem('currentSearchParams')).startDate
         };
         console.log(activity_Obj);
     }
@@ -34,32 +35,40 @@ function selectActivity_handler() {
             phoneNumber: event_obj.phone,
             url: event_obj.url,
             brewType: event_obj.brewery_type,
-            type: 'brewery'
+            type: 'brewery',
+            activityDate: JSON.parse(localStorage.getItem('currentSearchParams')).startDate
         }
         console.log(activity_Obj)
         console.log("Activity is resturant")
     }
+    
+    //Save activity into active itinerary
+    saveActivityToItinerary(activity_Obj);
 
-    //local storage
+    return activity_Obj;
+}
+
+
+function saveActivityToItinerary(activity_Obj) {
+    //save activity to local storage
     localStorage.setItem('active-activity-obj', JSON.stringify(activity_Obj));
 
     //update current active itinerary or make one if not present
     if (localStorage.getItem('active-itinerary') == null) {
         console.log('No active itinerary present, making one');
-        tempObj = { 1: activity_Obj };
-        localStorage.setItem('active-itinerary', JSON.stringify(tempObj));
+        var newActivityList = [activity_Obj];
+        localStorage.setItem('active-itinerary', JSON.stringify(newActivityList));
     }
     else {
         console.log('active itin found, updating');
         tempItin = JSON.parse(localStorage.getItem('active-itinerary'));
-        var objectLength = Object.keys(tempItin).length;
-        tempItin[(objectLength + 1)] = activity_Obj;
+        tempItin.push(activity_Obj);
         localStorage.setItem('active-itinerary', JSON.stringify(tempItin));
         console.log(tempItin)
     }
-    return activity_Obj;
 }
 
+//functions for building cards based on their activity type
 function buildActivityCard_Event(activity_Obj) {
     $cardDiv = $('<div>').addClass("card");
     $cardDiv.css({ "width": "800px" });
@@ -126,7 +135,7 @@ function buildActivityCard_Brewery(activity_Obj) {
 function loadLocalItinerary() {
     let itinerary = JSON.parse(localStorage.getItem('active-itinerary'));
 
-    var i = 1;
+    var i = 0;
     for (var activity in itinerary) {
         if (itinerary.hasOwnProperty(activity)) {
             if (itinerary[i].type == 'event') {
@@ -143,33 +152,45 @@ function loadLocalItinerary() {
     }
 }
 
+// Currently local storage is not taking the date key names set below. Gotta figure out why. Also have to add dates to itineraries
+// if there is already saved itineraries.
+
 function saveActiveItinerary() {
     activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
     if (localStorage.getItem('savedItineraries') == null || localStorage.getItem('savedItineraries') == 'null') {
         console.log('no saved itineraries found, creating key');
-        var newItineraryList = [];
-        newItineraryList.push(activeItin);
+        var newItineraryList = [activeItin];
+        console.log(newItineraryList);
+        var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
+
+        newItineraryList[`${keyName}`] = newItineraryList['0'];
+
+        delete newItineraryList['0'];
+        newItineraryList.shift();
+
         localStorage.setItem('savedItineraries', JSON.stringify(newItineraryList));
         console.log(newItineraryList);
     }
     else {
         console.log('saved itineraries found, appending active itinerary');
         tempItinList = JSON.parse(localStorage.getItem('savedItineraries'));
-        var objectLength = Object.keys(tempItinList).length;
-        console.log(tempItinList);
+        
         tempItinList.push(activeItin);
+        console.log(tempItinList);
         localStorage.setItem('savedItineraries', JSON.stringify(tempItinList));
     }
     
 }
 
-//add dates to saved itineraries
+
 
 function loadSavedItinerary() {
 
 }
 
 loadLocalItinerary();
+
+//place in more contextual areas
 saveActiveItinerary();
 
 

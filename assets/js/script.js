@@ -34,6 +34,7 @@ function eventSearch_handleClick() {
                 startDate: searchedStartDate,
                 endDate: searchedEndDate
             }
+            saveSearchParam(searchOptions);
             fetchEvent(searchOptions);
             document.getElementById('city').value = "";
             document.getElementById('category').value = "";
@@ -45,6 +46,7 @@ function eventSearch_handleClick() {
                 city: searchedCity,
                 startDate: searchedStartDate,
             }
+            saveSearchParam(searchOptions);
             fetchBrew(searchOptions);
             document.getElementById('city').value = "";
             document.getElementById('category').value = "";
@@ -125,6 +127,11 @@ function fetchBrew(searchOptions) {
                     }
                 });
         });
+}
+
+//save search options into local storage
+function saveSearchParam(searchOptions) {
+    localStorage.setItem('currentSearchParams', JSON.stringify(searchOptions));
 }
 
 // click listeners for category options 
