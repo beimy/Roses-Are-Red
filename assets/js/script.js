@@ -27,7 +27,6 @@ function eventSearch_handleClick() {
 
         var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
 
-        
         if (activitySelector == "events" && searchedCity && searchedStartDate && searchedEndDate) {
             var searchOptions = {
                 city: searchedCity,
@@ -106,7 +105,7 @@ function fetchBrew(searchOptions) {
             const { lat, lon } = data[0];
 
             // fetch brewery data from open brewery db api
-            let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=10`
+            let brew_api = `https://api.openbrewerydb.org/breweries?by_city=${searchOptions.city}&by_dist=${lat},${lon}&per_page=20`
             fetch(brew_api)
                 .then(data => data.json())
                 .then(data => {
@@ -127,7 +126,6 @@ function fetchBrew(searchOptions) {
                 });
         });
 }
-
 
 // click listeners for category options 
 document.getElementById('arts').addEventListener("click", function () {

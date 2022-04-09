@@ -24,7 +24,6 @@ html {
     color: var(--drk-red);
 }
 
-
 .input-box {
     display: flex;
     flex-wrap: wrap;
@@ -93,10 +92,18 @@ p {
     margin: 10px;
 }
 
+main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
 .results {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin: 50px 0;
 }
 
 .event-results, .brew-results {
@@ -108,6 +115,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 .card {
@@ -156,46 +164,3 @@ p {
     font-weight: bold;
     cursor: pointer;
 }
-
-/* 
-.radio-wrapper label {
-    position: relative;
-    left: 10px;
-    margin: 10px;
-    line-height: 1.6;
-}
-
-.radio-wrapper label::before {
-    content: "";
-    height: 20px;
-    width: 20px;
-    background: var(--drk);
-    border: 1px solid var(--drk-red);
-    position: absolute;
-    top: -4px;
-    left: -30px;
-}
-
-.radio-wrapper label::before {
-    border-radius: 50%;
-}
-
-.radio-wrapper label::after {
-    content: "";
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--drk-red);
-    position: absolute;
-    left: -29px;
-    top: -3px;
-    background-image: radial-gradient(circle, var(--drk-red), var(--drk));
-}
-
-.radio-wrapper input + label::after {
-    content: none;
-}
-
-.radio-wrapper input:checked + label::after{
-    content: "";
-} */
