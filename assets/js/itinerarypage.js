@@ -125,7 +125,7 @@ function buildActivityCard_Brewery(activity_Obj){
 
 function loadLocalItinerary() {
     let itinerary = JSON.parse(localStorage.getItem('active-itinerary'));
-    
+
     var i = 1;
     for(var activity in itinerary) {
         if(itinerary.hasOwnProperty(activity)){
@@ -143,6 +143,34 @@ function loadLocalItinerary() {
     }
 }
 
+function saveActiveItinerary() {
+    activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
+    if (localStorage.getItem('savedItineraries') == null || localStorage.getItem('savedItineraries') == 'null') {
+        console.log('no saved itineraries found, creating key');
+        var newItineraryList = [];
+        newItineraryList.push(activeItin);
+        localStorage.setItem('savedItineraries', JSON.stringify(newItineraryList));
+        console.log(newItineraryList);
+    }
+    else {
+        console.log('saved itineraries found, appending active itinerary');
+        tempItinList = JSON.parse(localStorage.getItem('savedItineraries'));
+        var objectLength = Object.keys(tempItinList).length;
+        console.log(tempItinList);
+        tempItinList.push(activeItin);
+        localStorage.setItem('savedItineraries', JSON.stringify(tempItinList));
+    }
+    
+}
+
+//add dates to saved itineraries
+
+function loadSavedItinerary() {
+
+}
 
 loadLocalItinerary();
-// buildActivityCard_Event(JSON.parse(localStorage.getItem("active-activity-obj")));
+saveActiveItinerary();
+
+
+
