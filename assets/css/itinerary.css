@@ -22,9 +22,13 @@ html {
     background-color: var(--drk);
 }
 
-.navbar-item {
-    display: flex;
-    justify-content: space-between;
+.roses {
+    color: white;
+}
+
+.roses:hover {
+    color: var(--drk-red);
+    font-weight: bold;
 }
 
 

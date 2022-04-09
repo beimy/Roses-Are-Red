@@ -16,6 +16,25 @@ html {
     background-color: var(--drk);
 }
 
+.navbar {
+    background-color: var(--drk);
+}
+
+.roses {
+    color: white;
+}
+
+.roses:hover {
+    color: var(--drk-red);
+    font-weight: bold;
+}
+
+.new-search:hover, .itinerary-page:hover {
+    color: var(--drk-red);
+    font-weight: bold;
+}
+
+
 .hide {
     display: none;
 }
@@ -130,14 +149,14 @@ main {
     margin: 5px;
     padding: 5px;
     text-align: center;
-    background-color: var(--drk);
-    color: #ffffff;
+    background-color: white;
+    color: var(--drk);
     font-weight: bold;
 }
 
 .card h4,
 .card a {
-    background-color: var(--drk-red);
+    background-color: white;
 }
 
 .card img {
