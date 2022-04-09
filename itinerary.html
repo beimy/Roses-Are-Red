@@ -14,6 +14,7 @@
 
 <body>
     <!--Header Section-->
+    <header></header>
     <nav class="navbar navbar-expand-lg border-bottom border-white">
         <!--Logo-->
         <a class="navbar-brand" href="./index.html">
@@ -21,27 +22,26 @@
         </a>
 
         <!--Itin Dropdown-->
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
             </div>
         </div>
 
+
         <!--Current itin location time -->
-        <span id="current-itin-time" class="navbar-text text-white">
+        <span id="current-itin-time" class="navbar-text text-white time">
             Time:
         </span>
-        <span id="current-itin-loc" class="navbar-text text-white">
+        <span id="current-itin-loc" class="navbar-text text-white location">
             Location:
         </span>
     </nav>
+
+    </header>
 
     <!--Activity Card List-->
     <div class="activity-list">
@@ -83,13 +83,12 @@
                     <a id="activity-link" href="">WEBSITE</a>
                     <p class="text-white" id="activity-distance-between">DISTANCE TO TRAVEL</p>
 
-                </div> -->
+                </div>
 
             </div>
         </div>
     </div>
     </div>
-
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
