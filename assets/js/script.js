@@ -25,34 +25,34 @@ function eventSearch_handleClick() {
     var searchedStartDate = document.getElementById('start-date').value.trim();
     var searchedEndDate = document.getElementById('end-date').value.trim();
 
-    // validate search options with an if statement
-    if (searchedCity && searchedStartDate && searchedEndDate) {
-        var searchOptions = {
-            city: searchedCity,
-            category: searchedCategory,
-            startDate: searchedStartDate,
-            endDate: searchedEndDate
-        }
-
         var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
 
-        if (activitySelector == "events") {
+        
+        if (activitySelector == "events" && searchedCity && searchedStartDate && searchedEndDate) {
+            var searchOptions = {
+                city: searchedCity,
+                category: searchedCategory,
+                startDate: searchedStartDate,
+                endDate: searchedEndDate
+            }
             fetchEvent(searchOptions);
             document.getElementById('city').value = "";
             document.getElementById('category').value = "";
             document.getElementById('start-date').value = "";
             document.getElementById('end-date').value = "";
             $(".hero").addClass("hide");
-        } else if (activitySelector == "breweries") {
+        } else if (activitySelector == "breweries" && searchedCity && searchedStartDate) {
+            var searchOptions = {
+                city: searchedCity,
+                startDate: searchedStartDate,
+            }
             fetchBrew(searchOptions);
             document.getElementById('city').value = "";
             document.getElementById('category').value = "";
             document.getElementById('start-date').value = "";
             document.getElementById('end-date').value = "";
             $(".hero").addClass("hide");
-        }
-
-    } else {
+        } else {
 
         // modal 
         const modalSearch = document.querySelector('#search');
@@ -66,9 +66,6 @@ function eventSearch_handleClick() {
         modalBg.addEventListener('click', () => {
             modal.classList.remove('is-active');
         })
-
-        // alert("Please enter a city, a start date, and an end date.");
-        // return;
     }
 };
 
@@ -166,6 +163,7 @@ document.getElementById('sports').addEventListener("click", function () {
 $(document).on("click", "#events", () => {
     $(".category-unhide").removeClass("hide");
     $(".category-unhide").addClass("input-box");
+    $(".end-date").removeClass("hide");
     $(".radio-wrapper").find("label[for='breweries']").removeClass("has-text-dark-red has-text-weight-bold");
     $(".radio-wrapper").find("label[for='events']").addClass("has-text-dark-red has-text-weight-bold");
 });
@@ -173,6 +171,7 @@ $(document).on("click", "#events", () => {
 $(document).on("click", "#breweries", () => {
     $(".category-unhide").addClass("hide");
     $(".category-unhide").removeClass("input-box");
+    $(".end-date").addClass("hide");
     $(".radio-wrapper").find("label[for='events']").removeClass("has-text-dark-red has-text-weight-bold");
     $(".radio-wrapper").find("label[for='breweries']").addClass("has-text-dark-red has-text-weight-bold");
 });

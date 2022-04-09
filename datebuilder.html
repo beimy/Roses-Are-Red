@@ -59,8 +59,8 @@
                                 class="has-text-dark-red has-text-weight-bold">Date:</span></label>
                         <p class="has-text-white is-size-5">Start Date:</p>
                         <input class="input is-rounded" type="text" id="start-date" placeholder="i.e. YYYY-MM-DD">
-                        <p class="has-text-white is-size-5">End Date:</p>
-                        <input class="input is-rounded" type="text" id="end-date" placeholder="i.e. YYYY-MM-DD">
+                        <p class="has-text-white is-size-5 end-date">End Date:</p>
+                        <input class="input is-rounded end-date" type="text" id="end-date" placeholder="i.e. YYYY-MM-DD">
                     </div>
                     <a class="button is-light is-normal is-responsive has-text-weight-semibold" type="button"
                         id="search" class="btn btn-dark">Search</a>
@@ -72,26 +72,16 @@
     <main class="results">
         <div class="event-results"></div>
         <div class="brew-results"></div>
+        </div>
     </main>
 
     <!--Modal-->
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-content">
-            <p class="title mb-3 has-text-white is-size-3">Please enter:
-                <ul class="is-size-4 has-text-white has-text-weight-bold">
-                    <li>*a city*</li>
-                    <li>*a start date*</li>
-                    <li>*and*</li>
-                    <li>*an end date*</li>
-                </ul>
-            </p>
+            <p class="title mb-3 has-text-white is-size-4">*Please enter required fields</p>
         </div>
     </div>
-
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
