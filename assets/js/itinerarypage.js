@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     //Load active-itinerary, get the start date, set the buttons html to the start date
     var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
     var itinDate = currentItin['0'].activityDate;
@@ -12,7 +12,7 @@ window.onload = function() {
     // console.log(Object.keys(savedItineraries));
 
     //create and append the buttons
-    for(var i = 0; i < savedItinerariesLength; i++) {
+    for (var i = 0; i < savedItinerariesLength; i++) {
         $button = $(`<a class='dropdown-itin-btn' type='button'>${Object.keys(savedItineraries)[i]}</a>`);
         $('.dropdown-content').append($button);
     }
@@ -73,7 +73,7 @@ function buildActivityObj(event_obj) {
         console.log(activity_Obj)
         console.log("Activity is resturant")
     }
-    
+
     //Save activity into active itinerary
     saveActivityToItinerary(activity_Obj);
 
@@ -88,7 +88,7 @@ function saveActivityToItinerary(activity_Obj) {
     //update current active itinerary or make one if not present
     if (localStorage.getItem('active-itinerary') == null) {
         console.log('No active itinerary present, making one');
-        var newActivityList = {0 : activity_Obj};
+        var newActivityList = { 0: activity_Obj };
         localStorage.setItem('active-itinerary', JSON.stringify(newActivityList));
     }
     else {
@@ -104,25 +104,25 @@ function saveActivityToItinerary(activity_Obj) {
 function buildActivityCard_Event(activity_Obj) {
 
     $card = $('<div class="col-sm-5 card">');
-        $img = $('<img class="card-img">');
-        $img.attr('src', `${activity_Obj.img}`);
-            $card.append($img);
-        $col_sm_7 = $('<div class="col-sm-7">');
-            $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
-            $time = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.time}</h4>`);
-            $venue = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-venue">${activity_Obj.venue}</h4>`);
-            $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
-            $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light
+    $img = $('<img class="card-img">');
+    $img.attr('src', `${activity_Obj.img}`);
+    $card.append($img);
+    $col_sm_7 = $('<div class="col-sm-7">');
+    $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
+    $time = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.time}</h4>`);
+    $venue = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-venue">${activity_Obj.venue}</h4>`);
+    $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
+    $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light
                          is-small is-responsive" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
-            $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold
+    $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold
                          button is-light is-small is-responsive" href="" target="_blank">REMOVE<span class="oi
                          oi-trash has-text-dark-red m-2 has-background-white"></span></a>`);
-        $col_sm_7.append($name);
-        $col_sm_7.append($time);
-        $col_sm_7.append($venue);
-        $col_sm_7.append($address);
-        $col_sm_7.append($link);
-        $col_sm_7.append($remove);
+    $col_sm_7.append($name);
+    $col_sm_7.append($time);
+    $col_sm_7.append($venue);
+    $col_sm_7.append($address);
+    $col_sm_7.append($link);
+    $col_sm_7.append($remove);
     $card.append($col_sm_7);
 
     $('.activity-list').append($card);
@@ -131,17 +131,17 @@ function buildActivityCard_Event(activity_Obj) {
 function buildActivityCard_Brewery(activity_Obj) {
 
     $div = $(`<div class="col-sm-7 card">`);
-        $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
-        $brewType = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.brewType}</h4>`);
-        $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
-        $phone = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.phoneNumber}</h4>`);
-        $buttonDiv = $(`<div></div>`);
-            $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
+    $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
+    $brewType = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.brewType}</h4>`);
+    $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
+    $phone = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.phoneNumber}</h4>`);
+    $buttonDiv = $(`<div></div>`);
+    $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
                         is-responsive"  href="${activity_Obj.url}" target="_blank">WEBSITE</a>`);
-            $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
+    $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
                             is-responsive" href="" target="_blank">REMOVE<span class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>`)
-        $buttonDiv.append($link);
-        $buttonDiv.append($remove);
+    $buttonDiv.append($link);
+    $buttonDiv.append($remove);
     $div.append($name);
     $div.append($brewType);
     $div.append($address);
@@ -198,17 +198,17 @@ function saveActiveItinerary() {
         var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
         newItineraryList[`${keyName}`] = activeItin;
         localStorage.setItem('savedItineraries', JSON.stringify(newItineraryList));
-        
+
     }
     else {
         console.log('saved itineraries found, appending active itinerary');
         tempItinList = JSON.parse(localStorage.getItem('savedItineraries'));
         var currentListLength = Object.keys(tempItinList).length;
         var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
-        tempItinList[`${keyName}`] = activeItin; 
+        tempItinList[`${keyName}`] = activeItin;
         localStorage.setItem('savedItineraries', JSON.stringify(tempItinList));
     }
-    
+
 }
 
 function loadThisItinerary() {
@@ -217,7 +217,7 @@ function loadThisItinerary() {
 
     //clear current cards
     $('.activity-list').empty();
-    
+
     //load itinerary onto page
     generateCardsForThisItinerary(savedItineraries[`${dateToGet}`]);
 }
@@ -232,14 +232,14 @@ saveActiveItinerary();
 
 //Modal for deleting current itinerary
 const modalSearch = document.querySelector('#warning');
-        const modalBg = document.querySelector('.modal-background');
-        const modal = document.querySelector('.modal');
+const modalBg = document.querySelector('.modal-background');
+const modal = document.querySelector('.modal');
 
-        $(document).on('click', '#warning', () => {
-            $('.modal').addClass('is-active');
-        })
-        
-        $(document).on('click', '.modal-background', () => {
-            $('.modal').removeClass('is-active');
-        })
+$(document).on('click', '#warning', () => {
+    $('.modal').addClass('is-active');
+})
+
+$(document).on('click', '.modal-background', () => {
+    $('.modal').removeClass('is-active');
+})
 
