@@ -56,15 +56,15 @@ function saveActivityToItinerary(activity_Obj) {
     //update current active itinerary or make one if not present
     if (localStorage.getItem('active-itinerary') == null) {
         console.log('No active itinerary present, making one');
-        var newActivityList = [activity_Obj];
+        var newActivityList = {0 : activity_Obj};
         localStorage.setItem('active-itinerary', JSON.stringify(newActivityList));
     }
     else {
         console.log('active itin found, updating');
         tempItin = JSON.parse(localStorage.getItem('active-itinerary'));
-        tempItin.push(activity_Obj);
+        var tempItinLength = Object.keys(tempItin).length;
+        tempItin[`${tempItinLength}`] = activity_Obj;
         localStorage.setItem('active-itinerary', JSON.stringify(tempItin));
-        console.log(tempItin)
     }
 }
 
@@ -157,26 +157,20 @@ function loadLocalItinerary() {
 
 function saveActiveItinerary() {
     activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
-    if (localStorage.getItem('savedItineraries') == null || localStorage.getItem('savedItineraries') == 'null') {
+    if (localStorage.getItem('savedItineraries') === null || localStorage.getItem('savedItineraries') == 'null') {
         console.log('no saved itineraries found, creating key');
-        var newItineraryList = [activeItin];
-        console.log(newItineraryList);
+        var newItineraryList = {};
         var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
-
-        newItineraryList[`${keyName}`] = newItineraryList['0'];
-
-        delete newItineraryList['0'];
-        newItineraryList.shift();
-
+        newItineraryList[`${keyName}`] = activeItin;
         localStorage.setItem('savedItineraries', JSON.stringify(newItineraryList));
-        console.log(newItineraryList);
+        
     }
     else {
         console.log('saved itineraries found, appending active itinerary');
         tempItinList = JSON.parse(localStorage.getItem('savedItineraries'));
-        
-        tempItinList.push(activeItin);
-        console.log(tempItinList);
+        var currentListLength = Object.keys(tempItinList).length;
+        var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
+        tempItinList[`${keyName}`] = activeItin; 
         localStorage.setItem('savedItineraries', JSON.stringify(tempItinList));
     }
     
