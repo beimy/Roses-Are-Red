@@ -1,25 +1,42 @@
 window.onload = function () {
-    //Load active-itinerary, get the start date, set the buttons html to the start date
-    var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
-    var itinDate = currentItin['0'].activityDate;
-    $dropdown = $('.dropbtn').html(`${itinDate}`);
+    if ($('body').is('.ItineraryPageType')) {
+        console.log('only this page')
+        //Load active-itinerary, get the start date, set the buttons html to the start date
+        if(!JSON.parse(localStorage.getItem('active-itinerary') == null)) {
+            var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
+            var itinDate = currentItin['0'].activityDate;
+            $dropdown = $('.dropbtn').html(`${itinDate}`);
 
-    //load locally stored itineraries into buttons for the dropdown
-    var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
-    var savedItinerariesLength = Object.keys(savedItineraries).length;
-    // console.log(savedItineraries)
-    // console.log(savedItinerariesLength);
-    // console.log(Object.keys(savedItineraries));
+            loadLocalItinerary();
+        }
+        else{console.log('active itinerary is null')}
 
-    //create and append the buttons
-    for (var i = 0; i < savedItinerariesLength; i++) {
-        $button = $(`<a class='dropdown-itin-btn' type='button'>${Object.keys(savedItineraries)[i]}</a>`);
-        $('#itinerary-dropdown').append($button);
+        //load locally stored itineraries into buttons for the dropdown
+        
+        if(!localStorage.getItem('savedItineraries') === null) {
+            var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
+            var savedItinerariesLength = Object.keys(savedItineraries).length;
+            // console.log(savedItineraries)
+            // console.log(savedItinerariesLength);
+            // console.log(Object.keys(savedItineraries));
+
+            //create and append the buttons
+            for (var i = 0; i < savedItinerariesLength; i++) {
+                $button = $(`<a class='dropdown-itin-btn' type='button'>${Object.keys(savedItineraries)[i]}</a>`);
+                $('#itinerary-dropdown').append($button);
+            }
+
+            $('.dropdown-itin-btn').on('click', loadThisItinerary);
+        }
+        else{console.log('no saved active itineraries')}
+        
     }
-
-    $('.dropdown-itin-btn').on('click', loadThisItinerary);
-
 }
+
+//Modal for deleting current itinerary
+const modalSearch = document.querySelector('#warning');
+const modalBg = document.querySelector('.modal-background');
+const modal = document.querySelector('.modal');
 
 //handles event data passing into the itinerary
 function selectActivity_handler() {
@@ -160,11 +177,11 @@ function loadLocalItinerary() {
         if (itinerary.hasOwnProperty(activity)) {
             if (itinerary[i].type == 'event') {
                 buildActivityCard_Event(itinerary[i])
-                console.log('building event card');
+                // console.log('building event card');
             }
             else if (itinerary[i].type == 'brewery') {
                 buildActivityCard_Brewery(itinerary[i]);
-                console.log('building brewery card');
+                // console.log('building brewery card');
             }
             else { console.log('type returned wrong') };
         }
@@ -191,29 +208,50 @@ function generateCardsForThisItinerary(itinerary) {
 }
 
 function saveActiveItinerary() {
-    activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
-    if (localStorage.getItem('savedItineraries') === null || localStorage.getItem('savedItineraries') == 'null') {
-        console.log('no saved itineraries found, creating key');
-        var newItineraryList = {};
-        var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
-        newItineraryList[`${keyName}`] = activeItin;
-        localStorage.setItem('savedItineraries', JSON.stringify(newItineraryList));
 
-    }
-    else {
-        console.log('saved itineraries found, appending active itinerary');
-        tempItinList = JSON.parse(localStorage.getItem('savedItineraries'));
-        var currentListLength = Object.keys(tempItinList).length;
-        var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
-        tempItinList[`${keyName}`] = activeItin;
-        localStorage.setItem('savedItineraries', JSON.stringify(tempItinList));
-    }
+        activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
+        if (localStorage.getItem('savedItineraries') === null || localStorage.getItem('savedItineraries') == 'null') {
+            console.log('no saved itineraries found, creating key');
+            var newItineraryList = {};
+            var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
+            newItineraryList[`${keyName}`] = activeItin;
 
+            // removeEmptyObjects(newItineraryList);
+
+            localStorage.setItem('savedItineraries', JSON.stringify(newItineraryList));
+    
+        }
+        else {
+            console.log('saved itineraries found, appending active itinerary');
+            tempItinList = JSON.parse(localStorage.getItem('savedItineraries'));
+            var currentListLength = Object.keys(tempItinList).length;
+            var keyName = JSON.parse(localStorage.getItem('currentSearchParams')).startDate;
+            tempItinList[`${keyName}`] = activeItin;
+
+            // removeEmptyObjects(tempItinList);
+            console.log(tempItinList)
+            localStorage.setItem('savedItineraries', JSON.stringify(tempItinList));
+        }
+    
+    
+}
+
+function removeEmptyObjects(searchObj) {
+    console.log("cleaner called");
+    console.log(searchObj)
+    return Object.fromEntries(Object.entries(searchObj).filter(([_, v]) => v != null));
+    
 }
 
 function loadThisItinerary() {
     var dateToGet = $(this).text();
     var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
+
+    //set selected itinerary to active itinerary
+    localStorage.setItem('active-itinerary', JSON.stringify(savedItineraries[`${dateToGet}`]));
+
+    //set date to the dropdown menu
+    $dropdown = $('.dropbtn').html(`${savedItineraries['0'].activityDate}`);
 
     //clear current cards
     $('.activity-list').empty();
@@ -224,16 +262,6 @@ function loadThisItinerary() {
 
 
 
-//place in more contextual areas
-loadLocalItinerary();
-
-
-
-
-//Modal for deleting current itinerary
-const modalSearch = document.querySelector('#warning');
-const modalBg = document.querySelector('.modal-background');
-const modal = document.querySelector('.modal');
 
 $(document).on('click', '#warning', () => {
     $('.modal').addClass('is-active');
@@ -243,16 +271,24 @@ $(document).on('click', '.modal-background', () => {
     $('.modal').removeClass('is-active');
 })
 
+//listener for Get Started btn
 $('#start-date-btn').on('click', () => {
     localStorage.removeItem('active-itinerary');
 });
 
-$('#itinerary-btn').on('click', () => {
-    localStorage.removeItem('active-itinerary');
-});
+//listener for Itinerary btn
+// $('#itinerary-btn').on('click', () => {
+//     localStorage.removeItem('active-itinerary');
+// });
 
-$('#itinerary-page').on('click', () => {
+$(document).on('click', '#itinerary-btn', () => {
     saveActiveItinerary();
 });
+
+
+//listener for removing active itinerary when new search is clicked
+$(document).on('click', '#new-search', () => {
+    localStorage.removeItem('active-itinerary');
+})
 
 

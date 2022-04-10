@@ -1,5 +1,5 @@
 // add click event listener to call search button and run handleClick function
-document.getElementById('search').addEventListener('click', eventSearch_handleClick);
+// document.getElementById('search').addEventListener('click', eventSearch_handleClick);
 
 // set datepicker defaults globally
 $.datepicker.setDefaults($.datepicker.regional['nl']);
@@ -133,6 +133,9 @@ function saveSearchParam(searchOptions) {
     localStorage.setItem('currentSearchParams', JSON.stringify(searchOptions));
 }
 
+//click listener for get started btn
+$(document).on('click', '#search', eventSearch_handleClick);
+
 // click listeners for category options 
 document.getElementById('arts').addEventListener("click", function () {
     document.getElementById('category').value = "";
@@ -188,11 +191,12 @@ $(document).on("click", "#reload-input-hero", () => {
 
 $(document).on("click", '.activity-select-btn', selectActivity_handler);
 
-// $(document).on('click', '#add-to-itinerary-btn', () => {
-//     modal.classList.add('is-active');
-// })
-
 $(document).on('click', '.modal-background', () => {
     $('.modal').removeClass('is-active');
+});
+
+$(document).on('click', '#itinerary-page', () => {
+    console.log('clicked itinerary page')
+    saveActiveItinerary();
 });
 
