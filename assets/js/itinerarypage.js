@@ -1,3 +1,26 @@
+window.onload = function() {
+    //Load active-itinerary, get the start date, set the buttons html to the start date
+    var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
+    var itinDate = currentItin['0'].activityDate;
+    $dropdown = $('.dropbtn').html(`${itinDate}`);
+
+    //load locally stored itineraries into buttons for the dropdown
+    var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
+    var savedItinerariesLength = Object.keys(savedItineraries).length;
+    // console.log(savedItineraries)
+    // console.log(savedItinerariesLength);
+    // console.log(Object.keys(savedItineraries));
+
+    //create and append the buttons
+    for(var i = 0; i < savedItinerariesLength; i++) {
+        $button = $(`<a class='dropdown-itin-btn' type='button'>${Object.keys(savedItineraries)[i]}</a>`);
+        $('.dropdown-content').append($button);
+    }
+
+    $('.dropdown-itin-btn').on('click', loadThisItinerary);
+
+}
+
 //handles event data passing into the itinerary
 function selectActivity_handler() {
     //get the activity obj from the data attribute
@@ -97,35 +120,6 @@ function buildActivityCard_Event(activity_Obj) {
 }
 
 function buildActivityCard_Brewery(activity_Obj) {
-    // $cardDiv = $('<div>').addClass("card");
-    // $cardDiv.css({ "width": "800px" });
-
-    // used for adding img's
-    // $gutterDiv = $('<div>').addClass('row no-gutters');
-    //     $imgDiv = $('<div>').addClass('col-sm-5');
-    //         $img = $('<img>').addClass('card-img');
-    //         $img.attr("src" , `${activity_Obj.img}`);
-    //     $imgDiv.append($img);
-    // $gutterDiv.append($imgDiv);
-
-    // $holderDiv = $('<div>').addClass('col-sm-7');
-    // $cardBody = $('<div>').addClass('card-body');
-    // $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
-    // $time = $(`<p class="text-white" id="activity-time">OPENS AT:<span id="opens">0:00</span> CLOSES AT:<span id="closes">12:00</span></p>`);
-    // $brewType = $(`<p class="text-white" id="activity-brew-type">${activity_Obj.brewType}</p>`);
-    // $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
-    // $link = $(`<a id="activity-link" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
-    // $cardBody.append($name);
-    // $cardBody.append($time);
-    // $cardBody.append($brewType);
-    // $cardBody.append($address);
-    // $cardBody.append($link);
-
-    // $holderDiv.append($cardBody);
-    // $cardDiv.append($gutterDiv);
-    // $cardDiv.append($holderDiv);
-
-    // $('.activity-list').append($cardDiv);
 
     $div = $(`<div class="col-sm-7 card">`);
         $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
@@ -166,6 +160,24 @@ function loadLocalItinerary() {
     }
 }
 
+function generateCardsForThisItinerary(itinerary) {
+    var i = 0;
+    for (var activity in itinerary) {
+        if (itinerary.hasOwnProperty(activity)) {
+            if (itinerary[i].type == 'event') {
+                buildActivityCard_Event(itinerary[i])
+                console.log('building event card');
+            }
+            else if (itinerary[i].type == 'brewery') {
+                buildActivityCard_Brewery(itinerary[i]);
+                console.log('building brewery card');
+            }
+            else { console.log('type returned wrong') };
+        }
+        i++;
+    }
+}
+
 function saveActiveItinerary() {
     activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
     if (localStorage.getItem('savedItineraries') === null || localStorage.getItem('savedItineraries') == 'null') {
@@ -187,18 +199,26 @@ function saveActiveItinerary() {
     
 }
 
-
-function loadSavedItinerary() {
+function loadThisItinerary() {
+    var dateToGet = $(this).text();
     var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
-    console.log(savedItineraries);
+
+    //clear current cards
+    $('.activity-list').empty();
+    
+    //load itinerary onto page
+    generateCardsForThisItinerary(savedItineraries[`${dateToGet}`]);
 }
 
-loadLocalItinerary();
+
 
 //place in more contextual areas
+loadLocalItinerary();
 saveActiveItinerary();
 
 
+
+//Modal
 const modalSearch = document.querySelector('#warning');
         const modalBg = document.querySelector('.modal-background');
         const modal = document.querySelector('.modal');
