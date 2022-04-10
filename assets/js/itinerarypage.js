@@ -2,12 +2,15 @@ window.onload = function () {
     if($('body').is('.ItinPageType')) {
         
         //Load active-itinerary, get the start date, set the buttons html to the start date
-        if(!localStorage.getItem('active-itinerary') == null){
-            var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
-            var itinDate = currentItin['0'].activityDate;
-            $dropdown = $('.dropbtn').html(`${itinDate}`);
+        if(JSON.parse(localStorage.getItem('active-itinerary')) !== null) {
+            
+            //append dropdown button text
+            updateDropDownBtn(JSON.parse(localStorage.getItem('active-itinerary')))
+            // var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
+            // var itinDate = currentItin['0'].activityDate;
+            // console.log(itinDate)
+            // $dropdown = $('.dropbtn').html(`${itinDate}`);
         }
-
         //load locally stored itineraries into buttons for the dropdown
     var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
     var savedItinerariesLength = Object.keys(savedItineraries).length;
@@ -167,11 +170,11 @@ function loadLocalItinerary() {
         if (itinerary.hasOwnProperty(activity)) {
             if (itinerary[i].type == 'event') {
                 buildActivityCard_Event(itinerary[i])
-                console.log('building event card');
+                // console.log('building event card');
             }
             else if (itinerary[i].type == 'brewery') {
                 buildActivityCard_Brewery(itinerary[i]);
-                console.log('building brewery card');
+                // console.log('building brewery card');
             }
             else { console.log('type returned wrong') };
         }
@@ -227,6 +230,14 @@ function loadThisItinerary() {
 
     //load itinerary onto page
     generateCardsForThisItinerary(savedItineraries[`${dateToGet}`]);
+    updateDropDownBtn(savedItineraries[`${dateToGet}`])
+}
+
+function updateDropDownBtn(passedItin) {
+    var currentItin = passedItin;
+    var itinDate = currentItin['0'].activityDate;
+    console.log(itinDate)
+    $dropdown = $('.dropbtn').html(`${itinDate}`);
 }
 
 
@@ -254,9 +265,9 @@ $('#start-date-btn').on('click', () => {
     localStorage.removeItem('active-itinerary');
 });
 
-$('#itinerary-btn').on('click', () => {
-    localStorage.removeItem('active-itinerary');
-});
+// $('#itinerary-btn').on('click', () => {
+//     localStorage.removeItem('active-itinerary');
+// });
 
 $('#itinerary-page').on('click', () => {
     saveActiveItinerary();
