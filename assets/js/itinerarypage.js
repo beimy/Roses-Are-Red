@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
     //Load active-itinerary, get the start date, set the buttons html to the start date
     var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
     var itinDate = currentItin['0'].activityDate;
@@ -12,7 +12,7 @@ window.onload = function() {
     // console.log(Object.keys(savedItineraries));
 
     //create and append the buttons
-    for(var i = 0; i < savedItinerariesLength; i++) {
+    for (var i = 0; i < savedItinerariesLength; i++) {
         $button = $(`<a class='dropdown-itin-btn' type='button'>${Object.keys(savedItineraries)[i]}</a>`);
         $('.dropdown-content').append($button);
     }
@@ -205,7 +205,7 @@ function loadThisItinerary() {
 
     //clear current cards
     $('.activity-list').empty();
-    
+
     //load itinerary onto page
     generateCardsForThisItinerary(savedItineraries[`${dateToGet}`]);
 }
