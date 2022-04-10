@@ -1,12 +1,17 @@
 window.onload = function () {
-    //Load active-itinerary, get the start date, set the buttons html to the start date
-    var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
-    var itinDate = currentItin['0'].activityDate;
-    $dropdown = $('.dropbtn').html(`${itinDate}`);
+    if($('body').is('.ItinPageType')) {
+        
+        //Load active-itinerary, get the start date, set the buttons html to the start date
+        if(!localStorage.getItem('active-itinerary') == null){
+            var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
+            var itinDate = currentItin['0'].activityDate;
+            $dropdown = $('.dropbtn').html(`${itinDate}`);
+        }
 
-    //load locally stored itineraries into buttons for the dropdown
+        //load locally stored itineraries into buttons for the dropdown
     var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
     var savedItinerariesLength = Object.keys(savedItineraries).length;
+
     // console.log(savedItineraries)
     // console.log(savedItinerariesLength);
     // console.log(Object.keys(savedItineraries));
@@ -18,6 +23,8 @@ window.onload = function () {
     }
 
     $('.dropdown-itin-btn').on('click', loadThisItinerary);
+      
+    }
 
 }
 

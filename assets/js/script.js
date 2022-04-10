@@ -196,3 +196,7 @@ $(document).on('click', '.modal-background', () => {
     $('.modal').removeClass('is-active');
 });
 
+$(document).on('click', '#itinerary-page', () => {
+    saveActiveItinerary();
+})
+
