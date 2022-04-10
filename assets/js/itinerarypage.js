@@ -14,7 +14,7 @@ window.onload = function () {
     //create and append the buttons
     for (var i = 0; i < savedItinerariesLength; i++) {
         $button = $(`<a class='dropdown-itin-btn' type='button'>${Object.keys(savedItineraries)[i]}</a>`);
-        $('.dropdown-content').append($button);
+        $('#itinerary-dropdown').append($button);
     }
 
     $('.dropdown-itin-btn').on('click', loadThisItinerary);
@@ -226,7 +226,7 @@ function loadThisItinerary() {
 
 //place in more contextual areas
 loadLocalItinerary();
-saveActiveItinerary();
+
 
 
 
@@ -242,4 +242,17 @@ $(document).on('click', '#warning', () => {
 $(document).on('click', '.modal-background', () => {
     $('.modal').removeClass('is-active');
 })
+
+$('#start-date-btn').on('click', () => {
+    localStorage.removeItem('active-itinerary');
+});
+
+$('#itinerary-btn').on('click', () => {
+    localStorage.removeItem('active-itinerary');
+});
+
+$('#itinerary-page').on('click', () => {
+    saveActiveItinerary();
+});
+
 

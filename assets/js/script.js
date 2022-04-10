@@ -194,4 +194,5 @@ $(document).on("click", '.activity-select-btn', selectActivity_handler);
 
 $(document).on('click', '.modal-background', () => {
     $('.modal').removeClass('is-active');
-})
+});
+
