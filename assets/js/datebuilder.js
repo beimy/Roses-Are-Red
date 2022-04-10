@@ -16,6 +16,10 @@ function popActivityModal(event_obj) {
     buildActivityObj(event_obj);
 }
 
+$(document).on('click', '#dropdown-search', () => {
+    console.log('hi')
+})
+
 
 
 

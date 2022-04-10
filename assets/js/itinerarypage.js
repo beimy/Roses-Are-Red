@@ -3,14 +3,10 @@ window.onload = function () {
         
         //Load active-itinerary, get the start date, set the buttons html to the start date
         if(JSON.parse(localStorage.getItem('active-itinerary')) !== null) {
-            
             //append dropdown button text
             updateDropDownBtn(JSON.parse(localStorage.getItem('active-itinerary')))
-            // var currentItin = JSON.parse(localStorage.getItem('active-itinerary'));
-            // var itinDate = currentItin['0'].activityDate;
-            // console.log(itinDate)
-            // $dropdown = $('.dropbtn').html(`${itinDate}`);
         }
+
         //load locally stored itineraries into buttons for the dropdown
     var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
     var savedItinerariesLength = Object.keys(savedItineraries).length;
@@ -240,12 +236,8 @@ function updateDropDownBtn(passedItin) {
     $dropdown = $('.dropbtn').html(`${itinDate}`);
 }
 
-
-
 //place in more contextual areas
 loadLocalItinerary();
-
-
 
 
 //Modal for deleting current itinerary

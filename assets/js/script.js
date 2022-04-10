@@ -27,14 +27,69 @@ function eventSearch_handleClick() {
 
     var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
 
+    //pull all user entered data from search fields and pass into generateSearchParams
+    generateSearchParams(activitySelector, searchedCity, searchedCategory, searchedStartDate, searchedEndDate);
+
+    // if (activitySelector == "events" && searchedCity && searchedStartDate && searchedEndDate) {
+    //     var searchOptions = {
+    //         city: searchedCity,
+    //         category: searchedCategory,
+    //         startDate: searchedStartDate,
+    //         endDate: searchedEndDate,
+    //         lastActivityTypeSearched: activitySelector
+    //     }
+    //     saveSearchParam(searchOptions);
+    //     alterSearchSwapper();
+    //     fetchEvent(searchOptions);
+    //     document.getElementById('city').value = "";
+    //     document.getElementById('category').value = "";
+    //     document.getElementById('start-date').value = "";
+    //     document.getElementById('end-date').value = "";
+    //     $(".hero").addClass("hide");
+    // } else if (activitySelector == "breweries" && searchedCity && searchedStartDate) {
+    //     var searchOptions = {
+    //         city: searchedCity,
+    //         startDate: searchedStartDate,
+    //         lastActivityTypeSearched: activitySelector
+    //     }
+    //     saveSearchParam(searchOptions);
+    //     alterSearchSwapper();
+    //     fetchBrew(searchOptions);
+    //     document.getElementById('city').value = "";
+    //     document.getElementById('category').value = "";
+    //     document.getElementById('start-date').value = "";
+    //     document.getElementById('end-date').value = "";
+    //     $(".hero").addClass("hide");
+    // } else {
+    //     // please enter required input field modal
+    //     const modalSearch = document.querySelector('#search');
+    //     const modalBg = document.querySelector('.modal-background');
+    //     const modal = document.querySelector('.modal');
+
+    //     modalSearch.addEventListener('click', () => {
+    //         modal.classList.add('is-active');
+    //     });
+
+    //     modalBg.addEventListener('click', () => {
+    //         modal.classList.remove('is-active');
+    //     });
+    // }
+};
+
+//takes 1 string for activity type, and 4 for search params
+function generateSearchParams(activitySelector, searchedCity, searchedCategory, searchedStartDate, searchedEndDate) {
+
     if (activitySelector == "events" && searchedCity && searchedStartDate && searchedEndDate) {
+        console.log('here?')
         var searchOptions = {
             city: searchedCity,
             category: searchedCategory,
             startDate: searchedStartDate,
-            endDate: searchedEndDate
+            endDate: searchedEndDate,
+            lastActivityTypeSearched: activitySelector
         }
         saveSearchParam(searchOptions);
+        alterSearchSwapper();
         fetchEvent(searchOptions);
         document.getElementById('city').value = "";
         document.getElementById('category').value = "";
@@ -42,11 +97,14 @@ function eventSearch_handleClick() {
         document.getElementById('end-date').value = "";
         $(".hero").addClass("hide");
     } else if (activitySelector == "breweries" && searchedCity && searchedStartDate) {
+        console.log('or herer?')
         var searchOptions = {
             city: searchedCity,
             startDate: searchedStartDate,
+            lastActivityTypeSearched: activitySelector
         }
         saveSearchParam(searchOptions);
+        alterSearchSwapper();
         fetchBrew(searchOptions);
         document.getElementById('city').value = "";
         document.getElementById('category').value = "";
@@ -67,7 +125,7 @@ function eventSearch_handleClick() {
             modal.classList.remove('is-active');
         });
     }
-};
+}
 
 function fetchEvent(searchOptions) {
     // fetch event data from ticket master api
@@ -131,6 +189,58 @@ function fetchBrew(searchOptions) {
 //save search options into local storage
 function saveSearchParam(searchOptions) {
     localStorage.setItem('currentSearchParams', JSON.stringify(searchOptions));
+}
+
+//reveals and hides the search dropdown always calls populateSwapper
+function alterSearchSwapper() {
+    $swapperDiv = $('#hide-swapper');
+    if($swapperDiv.hasClass('hide')) {
+        $swapperDiv.removeClass('hide');
+    }
+    // else{$swapperDiv.addClass('hide')}
+
+    populateSwapper();
+}
+
+
+
+//handles the text of the search by dropdown
+function populateSwapper() {
+    var lastSearch = JSON.parse(localStorage.getItem('currentSearchParams')).lastActivityTypeSearched;
+    $('#dropdown-search').html(`${lastSearch}`);
+
+    $('#datebuilder-dropdown').empty();
+
+    //add terms to this array when adding api's to search 
+    var searchTermsArr = ['events', 'breweries'];
+    //loop through all activity types and append them as buttons to the dropdown
+    searchTermsArr.forEach(term => {
+        if(lastSearch != term){
+            $newButton = $(`<a type="button">${term}</a>`);
+            $newButton.on('click', swapperBtn_handler)
+            $('#datebuilder-dropdown').append($newButton);
+        }
+    });
+}
+
+//researches the appropriate API from saved searchOptions
+function swapperBtn_handler() {
+    var activityType = $(this).html()
+    var searchOptions = JSON.parse(localStorage.getItem('currentSearchParams'));
+    console.log(searchOptions)
+
+    if(activityType == 'events'){
+        $('.event-results').empty();
+        $('.brew-results').empty();
+        generateSearchParams(activityType, searchOptions.city, searchOptions.category, searchOptions.startDate, searchOptions.startDate);
+    }
+    if(activityType == 'breweries'){
+        $('.event-results').empty();
+        $('.brew-results').empty();
+        generateSearchParams(activityType, searchOptions.city, searchOptions.category, searchOptions.startDate, searchOptions.startDate);
+    }
+
+    // generateSearchParams(activityType, searchOptions.searchedCity, searchOptions.searchedCategory, searchOptions.searchedStartDate, searchOptions.searchedEndDate);
 }
 
 // click listeners for category options 
