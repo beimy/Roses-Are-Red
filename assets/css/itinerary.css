@@ -31,11 +31,13 @@ html {
     font-weight: bold;
 }
 
-.new-search, .warning {
+.new-search,
+.warning {
     color: white;
 }
 
-.new-search:hover, .warning:hover {
+.new-search:hover,
+.warning:hover {
     color: var(--drk-red);
     font-weight: bold;
 }
