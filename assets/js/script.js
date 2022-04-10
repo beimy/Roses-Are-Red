@@ -90,7 +90,7 @@ function fetchEvent(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Event Address:</span> ${event._embedded.venues[0].address.line1}</h4>
                         <h4>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}. ${event._embedded.venues[0].postalCode}</h4>
                         <a type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-dark is-small is-responsive" href=${event.url} target="_blank">Get Tickets Here</a>
-                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" role="link" id="go-to">Add To Itinerary</a>
+                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" role="link" id="add-to-itinerary-btn">Add To Itinerary</a>
                         </div>
                     </div>`
             });
@@ -120,7 +120,7 @@ function fetchBrew(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Address:</span> ${data[i].street}, ${data[i].city}, ${data[i].state}. ${data[i].postal_code}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Phone Number:</span> ${data[i].phone}</h4> 
                         <a type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-dark is-small is-responsive" href="${data[i].website_url}" target="_blank">Brewery Site</a>
-                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" id="to-go">Add To Itinerary</a>
+                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" id="add-to-itinerary-btn">Add To Itinerary</a>
                         </div>
                     </div>`
                     }
@@ -187,3 +187,11 @@ $(document).on("click", "#reload-input-hero", () => {
 });
 
 $(document).on("click", '.activity-select-btn', selectActivity_handler);
+
+// $(document).on('click', '#add-to-itinerary-btn', () => {
+//     modal.classList.add('is-active');
+// })
+
+$(document).on('click', '.modal-background', () => {
+    $('.modal').removeClass('is-active');
+})
