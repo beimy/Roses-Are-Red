@@ -30,7 +30,8 @@ window.onload = function () {
                 $('#itinerary-dropdown').append($button);
             }
 
-    $('body').on('click', '#activity-remove', removeFromItin);
+                $('body').on('click', '#activity-remove', removeFromItin);
+        }
       
     }
 
@@ -308,12 +309,6 @@ function removeFromItin() {
 
 //place in more contextual areas
 loadLocalItinerary();
-
-
-//Modal for deleting current itinerary
-const modalSearch = document.querySelector('#warning');
-const modalBg = document.querySelector('.modal-background');
-const modal = document.querySelector('.modal');
 
 $(document).on('click', '#warning', () => {
     $('.modal').addClass('is-active');
