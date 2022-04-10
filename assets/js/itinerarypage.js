@@ -23,10 +23,19 @@ window.onload = function () {
 
 //handles event data passing into the itinerary
 function selectActivity_handler() {
-    //get the activity obj from the data attribute
     var data_str = $(this).offsetParent(".card").data('activity-obj')
     var event_obj = JSON.parse(decodeURIComponent(data_str));
     console.log(event_obj);
+
+
+    popActivityModal(event_obj);
+}
+
+function buildActivityObj(event_obj) {
+    //get the activity obj from the data attribute
+    // var data_str = $(this).offsetParent(".card").data('activity-obj')
+    // var event_obj = JSON.parse(decodeURIComponent(data_str));
+    // console.log(event_obj);
 
     //generate activity object based on type 
     if (event_obj.type == "event") {
@@ -126,16 +135,19 @@ function buildActivityCard_Brewery(activity_Obj) {
     $brewType = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.brewType}</h4>`);
     $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
     $phone = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.phoneNumber}</h4>`);
+    $buttonDiv = $(`<div></div>`);
     $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
-                    is-responsive"  href="${activity_Obj.url}" target="_blank">WEBSITE</a>`);
+                        is-responsive"  href="${activity_Obj.url}" target="_blank">WEBSITE</a>`);
     $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
-                        is-responsive" href="" target="_blank">REMOVE<span class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>`)
+                            is-responsive" href="" target="_blank">REMOVE<span class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>`)
+    $buttonDiv.append($link);
+    $buttonDiv.append($remove);
     $div.append($name);
     $div.append($brewType);
     $div.append($address);
     $div.append($phone);
-    $div.append($link);
-    $div.append($remove);
+    $div.append($buttonDiv)
+
 
     $('.activity-list').append($div);
 }
@@ -218,16 +230,16 @@ saveActiveItinerary();
 
 
 
-//Modal
+//Modal for deleting current itinerary
 const modalSearch = document.querySelector('#warning');
 const modalBg = document.querySelector('.modal-background');
 const modal = document.querySelector('.modal');
 
-modalSearch.addEventListener('click', () => {
-    modal.classList.add('is-active');
-});
+$(document).on('click', '#warning', () => {
+    $('.modal').addClass('is-active');
+})
 
-modalBg.addEventListener('click', () => {
-    modal.classList.remove('is-active');
-});
+$(document).on('click', '.modal-background', () => {
+    $('.modal').removeClass('is-active');
+})
 
