@@ -70,41 +70,37 @@ function saveActivityToItinerary(activity_Obj) {
 
 //functions for building cards based on their activity type
 function buildActivityCard_Event(activity_Obj) {
-    $cardDiv = $('<div>').addClass("card");
-    $cardDiv.css({ "width": "800px" });
 
-    $gutterDiv = $('<div>').addClass('row no-gutters');
-    $imgDiv = $('<div>').addClass('col-sm-5');
-    $img = $('<img>').addClass('card-img');
-    $img.attr("src", `${activity_Obj.img}`);
-    $imgDiv.append($img);
-    $gutterDiv.append($imgDiv);
+    $card = $('<div class="col-sm-5 card">');
+        $img = $('<img class="card-img">');
+        $img.attr('src', `${activity_Obj.img}`);
+            $card.append($img);
+        $col_sm_7 = $('<div class="col-sm-7">');
+            $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
+            $time = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.time}</h4>`);
+            $venue = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-venue">${activity_Obj.venue}</h4>`);
+            $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
+            $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light
+                         is-small is-responsive" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
+            $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold
+                         button is-light is-small is-responsive" href="" target="_blank">REMOVE<span class="oi
+                         oi-trash has-text-dark-red m-2 has-background-white"></span></a>`);
+        $col_sm_7.append($name);
+        $col_sm_7.append($time);
+        $col_sm_7.append($venue);
+        $col_sm_7.append($address);
+        $col_sm_7.append($link);
+        $col_sm_7.append($remove);
+    $card.append($col_sm_7);
 
-    $holderDiv = $('<div>').addClass('col-sm-7');
-    $cardBody = $('<div>').addClass('card-body');
-    $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
-    $time = $(`<p class="text-white" id="activity-time">${activity_Obj.time}</p>`);
-    $venue = $(`<p class="text-white" id="activity-venue">${activity_Obj.venue}</p>`);
-    $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
-    $link = $(`<a id="activity-link" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
-    $cardBody.append($name);
-    $cardBody.append($time);
-    $cardBody.append($venue);
-    $cardBody.append($address);
-    $cardBody.append($link);
-
-    $holderDiv.append($cardBody);
-    $cardDiv.append($gutterDiv);
-    $cardDiv.append($holderDiv);
-
-    $('.activity-list').append($cardDiv);
+    $('.activity-list').append($card);
 }
 
 function buildActivityCard_Brewery(activity_Obj) {
-    $cardDiv = $('<div>').addClass("card");
-    $cardDiv.css({ "width": "800px" });
+    // $cardDiv = $('<div>').addClass("card");
+    // $cardDiv.css({ "width": "800px" });
 
-    //used for adding img's
+    // used for adding img's
     // $gutterDiv = $('<div>').addClass('row no-gutters');
     //     $imgDiv = $('<div>').addClass('col-sm-5');
     //         $img = $('<img>').addClass('card-img');
@@ -112,24 +108,42 @@ function buildActivityCard_Brewery(activity_Obj) {
     //     $imgDiv.append($img);
     // $gutterDiv.append($imgDiv);
 
-    $holderDiv = $('<div>').addClass('col-sm-7');
-    $cardBody = $('<div>').addClass('card-body');
-    $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
-    $time = $(`<p class="text-white" id="activity-time">OPENS AT:<span id="opens">0:00</span> CLOSES AT:<span id="closes">12:00</span></p>`);
-    $brewType = $(`<p class="text-white" id="activity-brew-type">${activity_Obj.brewType}</p>`);
-    $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
-    $link = $(`<a id="activity-link" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
-    $cardBody.append($name);
-    $cardBody.append($time);
-    $cardBody.append($brewType);
-    $cardBody.append($address);
-    $cardBody.append($link);
+    // $holderDiv = $('<div>').addClass('col-sm-7');
+    // $cardBody = $('<div>').addClass('card-body');
+    // $name = $(`<p class="text-white" id="activity-name">${activity_Obj.name}</p>`);
+    // $time = $(`<p class="text-white" id="activity-time">OPENS AT:<span id="opens">0:00</span> CLOSES AT:<span id="closes">12:00</span></p>`);
+    // $brewType = $(`<p class="text-white" id="activity-brew-type">${activity_Obj.brewType}</p>`);
+    // $address = $(`<p class="text-white" id="activity-address">${activity_Obj.address}</p>`);
+    // $link = $(`<a id="activity-link" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
+    // $cardBody.append($name);
+    // $cardBody.append($time);
+    // $cardBody.append($brewType);
+    // $cardBody.append($address);
+    // $cardBody.append($link);
 
-    $holderDiv.append($cardBody);
+    // $holderDiv.append($cardBody);
     // $cardDiv.append($gutterDiv);
-    $cardDiv.append($holderDiv);
+    // $cardDiv.append($holderDiv);
 
-    $('.activity-list').append($cardDiv);
+    // $('.activity-list').append($cardDiv);
+
+    $div = $(`<div class="col-sm-7 card">`);
+        $name = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-name">${activity_Obj.name}</h4>`);
+        $brewType = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-time">${activity_Obj.brewType}</h4>`);
+        $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
+        $phone = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.phoneNumber}</h4>`);
+        $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
+                    is-responsive"  href="${activity_Obj.url}" target="_blank">WEBSITE</a>`);
+        $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
+                        is-responsive" href="" target="_blank">REMOVE<span class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>`)
+    $div.append($name);
+    $div.append($brewType);
+    $div.append($address);
+    $div.append($phone);
+     $div.append($link);
+    $div.append($remove);
+
+    $('.activity-list').append($div);
 }
 
 function loadLocalItinerary() {
@@ -151,9 +165,6 @@ function loadLocalItinerary() {
         i++;
     }
 }
-
-// Currently local storage is not taking the date key names set below. Gotta figure out why. Also have to add dates to itineraries
-// if there is already saved itineraries.
 
 function saveActiveItinerary() {
     activeItin = JSON.parse(localStorage.getItem('active-itinerary'));
@@ -177,9 +188,9 @@ function saveActiveItinerary() {
 }
 
 
-
 function loadSavedItinerary() {
-
+    var savedItineraries = JSON.parse(localStorage.getItem('savedItineraries'));
+    console.log(savedItineraries);
 }
 
 loadLocalItinerary();
