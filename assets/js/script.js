@@ -25,37 +25,36 @@ function eventSearch_handleClick() {
     var searchedStartDate = document.getElementById('start-date').value.trim();
     var searchedEndDate = document.getElementById('end-date').value.trim();
 
-        var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
+    var activitySelector = document.querySelector('input[name="event-click"]:checked').value;
 
-        if (activitySelector == "events" && searchedCity && searchedStartDate && searchedEndDate) {
-            var searchOptions = {
-                city: searchedCity,
-                category: searchedCategory,
-                startDate: searchedStartDate,
-                endDate: searchedEndDate
-            }
-            saveSearchParam(searchOptions);
-            fetchEvent(searchOptions);
-            document.getElementById('city').value = "";
-            document.getElementById('category').value = "";
-            document.getElementById('start-date').value = "";
-            document.getElementById('end-date').value = "";
-            $(".hero").addClass("hide");
-        } else if (activitySelector == "breweries" && searchedCity && searchedStartDate) {
-            var searchOptions = {
-                city: searchedCity,
-                startDate: searchedStartDate,
-            }
-            saveSearchParam(searchOptions);
-            fetchBrew(searchOptions);
-            document.getElementById('city').value = "";
-            document.getElementById('category').value = "";
-            document.getElementById('start-date').value = "";
-            document.getElementById('end-date').value = "";
-            $(".hero").addClass("hide");
-        } else {
-
-        // modal 
+    if (activitySelector == "events" && searchedCity && searchedStartDate && searchedEndDate) {
+        var searchOptions = {
+            city: searchedCity,
+            category: searchedCategory,
+            startDate: searchedStartDate,
+            endDate: searchedEndDate
+        }
+        saveSearchParam(searchOptions);
+        fetchEvent(searchOptions);
+        document.getElementById('city').value = "";
+        document.getElementById('category').value = "";
+        document.getElementById('start-date').value = "";
+        document.getElementById('end-date').value = "";
+        $(".hero").addClass("hide");
+    } else if (activitySelector == "breweries" && searchedCity && searchedStartDate) {
+        var searchOptions = {
+            city: searchedCity,
+            startDate: searchedStartDate,
+        }
+        saveSearchParam(searchOptions);
+        fetchBrew(searchOptions);
+        document.getElementById('city').value = "";
+        document.getElementById('category').value = "";
+        document.getElementById('start-date').value = "";
+        document.getElementById('end-date').value = "";
+        $(".hero").addClass("hide");
+    } else {
+        // please enter required input field modal
         const modalSearch = document.querySelector('#search');
         const modalBg = document.querySelector('.modal-background');
         const modal = document.querySelector('.modal');
@@ -91,10 +90,35 @@ function fetchEvent(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Event Address:</span> ${event._embedded.venues[0].address.line1}</h4>
                         <h4>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}. ${event._embedded.venues[0].postalCode}</h4>
                         <a type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-dark is-small is-responsive" href=${event.url} target="_blank">Get Tickets Here</a>
-                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold">Add To Itinerary</a>
+                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" role="link" id="go-to">Add To Itinerary</a>
                         </div>
                     </div>`
+               
+                // go to itinerary modal from add to itinerary button in event card 
+                    document.querySelector("body").innerHTML +=
+                        `<div class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                        <p class="title mb-3 has-text-white is-size-4">${event.name}</p>
+                        </div>
+                        </div>`
+
+                    const modalSearch = document.querySelector('#go-to');
+                    const modalBg = document.querySelector('.modal-background');
+                    const modal = document.querySelector('.modal');
+
+                    modalSearch.addEventListener('click', () => {
+                        modal.classList.add('is-active');
+                    });
+
+                    modalBg.addEventListener('click', () => {
+                        modal.classList.remove('is-active');
+                    });
+
+
             });
+
+
         })
 };
 
@@ -121,11 +145,33 @@ function fetchBrew(searchOptions) {
                         <h4><span class="has-text-dark-red has-background-white">Address:</span> ${data[i].street}, ${data[i].city}, ${data[i].state}. ${data[i].postal_code}</h4>
                         <h4><span class="has-text-dark-red has-background-white">Phone Number:</span> ${data[i].phone}</h4> 
                         <a type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-dark is-small is-responsive" href="${data[i].website_url}" target="_blank">Brewery Site</a>
-                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold">Add To Itinerary</a>
+                        <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" id="to-go">Add To Itinerary</a>
                         </div>
                     </div>`
                     }
+                    // go to itinerary modal from add to itinerary button in brewery card 
+                    document.querySelector("body").innerHTML +=
+                        `<div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <p class="title mb-3 has-text-white is-size-4">*Test*</p>
+            </div>
+                </div>`
+
+                    const modalSearch = document.querySelector('#to-go');
+                    const modalBg = document.querySelector('.modal-background');
+                    const modal = document.querySelector('.modal');
+
+                    modalSearch.addEventListener('click', () => {
+                        modal.classList.add('is-active');
+                    });
+
+                    modalBg.addEventListener('click', () => {
+                        modal.classList.remove('is-active');
+                    });
                 });
+
+
         });
 }
 

@@ -13,7 +13,7 @@ Select the Get Started in the home screen to be redirected to the Date Builder p
 > Note: . 
 
 ## Website:
-Visit [Roses are Red](URL_here) to begin planning your date!
+Visit [Roses are Red](https://beimy.github.io/Roses-Are-Red/) to begin planning your date!
 
 ## Preview:
 ![screenrecording](Screencastify_gif_here)
