@@ -93,32 +93,7 @@ function fetchEvent(searchOptions) {
                         <a type="button" class="m-1 activity-select-btn button is-dark is-small is-responsive has-text-weight-bold" role="link" id="go-to">Add To Itinerary</a>
                         </div>
                     </div>`
-               
-                // go to itinerary modal from add to itinerary button in event card 
-                    document.querySelector("body").innerHTML +=
-                        `<div class="modal">
-                        <div class="modal-background"></div>
-                        <div class="modal-content">
-                        <p class="title mb-3 has-text-white is-size-4">${event.name}</p>
-                        </div>
-                        </div>`
-
-                    const modalSearch = document.querySelector('#go-to');
-                    const modalBg = document.querySelector('.modal-background');
-                    const modal = document.querySelector('.modal');
-
-                    modalSearch.addEventListener('click', () => {
-                        modal.classList.add('is-active');
-                    });
-
-                    modalBg.addEventListener('click', () => {
-                        modal.classList.remove('is-active');
-                    });
-
-
             });
-
-
         })
 };
 
@@ -149,29 +124,7 @@ function fetchBrew(searchOptions) {
                         </div>
                     </div>`
                     }
-                    // go to itinerary modal from add to itinerary button in brewery card 
-                    document.querySelector("body").innerHTML +=
-                        `<div class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <p class="title mb-3 has-text-white is-size-4">*Test*</p>
-            </div>
-                </div>`
-
-                    const modalSearch = document.querySelector('#to-go');
-                    const modalBg = document.querySelector('.modal-background');
-                    const modal = document.querySelector('.modal');
-
-                    modalSearch.addEventListener('click', () => {
-                        modal.classList.add('is-active');
-                    });
-
-                    modalBg.addEventListener('click', () => {
-                        modal.classList.remove('is-active');
-                    });
                 });
-
-
         });
 }
 
