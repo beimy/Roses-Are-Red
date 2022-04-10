@@ -262,4 +262,8 @@ $('#itinerary-page').on('click', () => {
     saveActiveItinerary();
 });
 
+$('#new-search').on('click', () => {
+    localStorage.removeItem('active-itinerary');
+})
+
 
