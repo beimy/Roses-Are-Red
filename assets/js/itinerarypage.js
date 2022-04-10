@@ -22,6 +22,8 @@ window.onload = function () {
     }
 
     $('.dropdown-itin-btn').on('click', loadThisItinerary);
+
+    $('body').on('click', '#activity-remove', removeFromItin);
       
     }
 
@@ -120,8 +122,8 @@ function buildActivityCard_Event(activity_Obj) {
     $address = $(`<h4 class="has-text-weight-bold has-text-white" id="activity-address">${activity_Obj.address}</h4>`);
     $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light
                          is-small is-responsive" href="${activity_Obj.url}" target="_blank">TICKET LINK</a>`);
-    $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold
-                         button is-light is-small is-responsive" href="" target="_blank">REMOVE<span class="oi
+    $remove = $(`<a id="activity-remove" type="button" class="m-1 has-text-dark-red has-text-weight-bold
+                         button is-light is-small is-responsive">REMOVE<span class="oi
                          oi-trash has-text-dark-red m-2 has-background-white"></span></a>`);
     $col_sm_7.append($name);
     $col_sm_7.append($time);
@@ -144,8 +146,8 @@ function buildActivityCard_Brewery(activity_Obj) {
     $buttonDiv = $(`<div></div>`);
     $link = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
                         is-responsive"  href="${activity_Obj.url}" target="_blank">WEBSITE</a>`);
-    $remove = $(`<a id="activity-link" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
-                            is-responsive" href="" target="_blank">REMOVE<span class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>`)
+    $remove = $(`<a id="activity-remove" type="button" class="m-1 has-text-dark-red has-text-weight-bold button is-light is-small
+                            is-responsive">REMOVE<span class="oi oi-trash has-text-dark-red m-2 has-background-white"></span></a>`)
     $buttonDiv.append($link);
     $buttonDiv.append($remove);
     $div.append($name);
@@ -232,8 +234,43 @@ function loadThisItinerary() {
 function updateDropDownBtn(passedItin) {
     var currentItin = passedItin;
     var itinDate = currentItin['0'].activityDate;
-    console.log(itinDate)
+    // console.log(itinDate)
     $dropdown = $('.dropbtn').html(`${itinDate}`);
+    localStorage.setItem('active-itinerary', JSON.stringify(currentItin));
+}
+
+function removeFromItin() {
+    var actitvityToDeleteName = $(this).parents('.col-sm-7').children('#activity-name').text();
+    var savedItins = JSON.parse(localStorage.getItem('savedItineraries'));
+    var thisItin = JSON.parse(localStorage.getItem('active-itinerary'));
+
+    //remove the selected activity in active itin
+    for(const property in thisItin){
+        if(thisItin[property].name == actitvityToDeleteName){
+            console.log(thisItin[property])
+            delete thisItin[property];
+        }
+    }
+    console.log(thisItin)
+
+    //replace the updated active itin with the itin in saved itin
+    // console.log(thisItin[Object.keys(thisItin)[0]].activityDate);
+    console.log(savedItins)
+    savedItins[`${thisItin[Object.keys(thisItin)[0]].activityDate}`] = thisItin;
+    console.log(savedItins)
+
+    //fix thisItin to not have missing element
+    itinArr = Object.values(thisItin);
+    console.log(itinArr)
+    tempObj = {}
+    for (var i = 0; i < itinArr.length; i++){
+        tempObj[`${i}`] = itinArr[i];
+    }
+    console.log(tempObj);
+
+    localStorage.setItem('active-itinerary', JSON.stringify(tempObj))
+    localStorage.setItem('savedItineraries', JSON.stringify(savedItins))
+
 }
 
 //place in more contextual areas
