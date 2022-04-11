@@ -73,7 +73,7 @@ function buildActivityObj(event_obj) {
             city: event_obj.city,
             location: { longitude: event_obj.longitude, latitude: event_obj.latitude },
             phoneNumber: event_obj.phone,
-            url: event_obj.url,
+            url: event_obj.website_url,
             brewType: event_obj.brewery_type,
             type: 'brewery',
             activityDate: JSON.parse(localStorage.getItem('currentSearchParams')).startDate
